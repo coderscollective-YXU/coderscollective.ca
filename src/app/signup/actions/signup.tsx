@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use server";
 
+import WelcomeEmail from '@/components/email/welcome-email';
 import { client } from "@/sanity/lib/client"; 
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function signup(formData: FormData) {
   try {
@@ -15,7 +20,25 @@ export async function signup(formData: FormData) {
       email: email,
     });
 
-    return { success: true };
+    try {
+      const { error } = await resend.emails.send({
+        from: 'Coders Collective <no-reply@updates.coderscollective.ca>',
+        to: [email],
+        replyTo: 'info@coderscollective.ca',
+        subject: 'Welcome to Coders Collective! 🚀',
+        react: WelcomeEmail(),
+      });
+  
+      if (error) {
+        console.log("Error sending email:", error);
+        return { success: false };
+      }
+  
+      return { success: true };
+    } catch (err) {
+      return { success: false };
+    }
+
   } catch (error) {
     console.error("Error creating newsletter signup:", error);
     return {
