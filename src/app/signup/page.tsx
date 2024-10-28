@@ -16,15 +16,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import MagicIcon from "./magic-icon";
+import signup from './actions/signup';
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", { email, isChecked });
-  };
 
   return (
     <>
@@ -50,12 +46,19 @@ export default function SignupPage() {
             </CardHeader>
 
             <CardContent>
-              <form onSubmit={handleSubmit} className='space-y-6'>
+              <form
+                action={async (formData) => {
+                  const response = await signup(formData);
+                  console.log("Form submitted:", response);
+                }}
+                className='space-y-6'
+              >
                 <div className='space-y-2'>
                   <Label htmlFor='email'>Email address</Label>
                   <Input
                     id='email'
                     type='email'
+                    name='email'
                     placeholder='your@email.com'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
