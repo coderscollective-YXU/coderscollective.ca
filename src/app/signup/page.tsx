@@ -16,9 +16,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import MagicIcon from "./magic-icon";
-import signup from './actions/signup';
+import signup from "./actions/signup";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
@@ -49,7 +51,9 @@ export default function SignupPage() {
               <form
                 action={async (formData) => {
                   const response = await signup(formData);
-                  console.log("Form submitted:", response);
+                  if (response.success) {
+                    router.push("/success");
+                  }
                 }}
                 className='space-y-6'
               >
