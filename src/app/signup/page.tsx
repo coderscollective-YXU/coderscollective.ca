@@ -35,7 +35,7 @@ export default function SignupPage() {
               </div>
               <CardTitle className='text-2xl font-bold text-center'>
                 Join Coders Collective
-                <div className='flex justify-center'>
+                <div className='flex justify-center mb-4'>
                   <Badge className='bg-blue-600 dark:bg-gray-100 text-gray-100 dark:text-gray-800 '>
                     London, ON
                   </Badge>
