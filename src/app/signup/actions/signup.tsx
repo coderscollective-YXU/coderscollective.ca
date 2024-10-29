@@ -22,7 +22,7 @@ export async function signup(formData: FormData) {
 
     try {
       const { error } = await resend.emails.send({
-        from: 'Coders Collective <no-reply@updates.coderscollective.ca>',
+        from: 'Coders Collective <info@updates.coderscollective.ca>',
         to: [email],
         replyTo: 'info@coderscollective.ca',
         subject: 'Welcome to Coders Collective! 🚀',

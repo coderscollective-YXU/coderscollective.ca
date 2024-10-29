@@ -13,7 +13,7 @@ const WelcomeEmail = () => {
   return (
     <Html>
       <Head />
-      <Preview>Welcome to Coders Collective! 🚀</Preview>
+      <Preview>Join London&apos;s growing tech community for meetups, learning sessions, and more!</Preview>
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>Welcome to Coders Collective! 🚀</Heading>
