@@ -16,8 +16,7 @@ const WelcomeEmail = () => {
       <Preview>Join London&apos;s growing tech community for meetups, learning sessions, and more!</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={h1}>Welcome to Coders Collective! 🚀</Heading>
-          
+          <Heading style={h1}>Get Ready for Something Amazing!</Heading>
           <Text style={text}>
             Thanks for joining the Coders Collective waitlist! We&apos;re excited to have you as part of our growing tech community in London.
           </Text>

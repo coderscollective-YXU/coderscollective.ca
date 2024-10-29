@@ -25,7 +25,7 @@ export async function signup(formData: FormData) {
         from: 'Coders Collective <info@updates.coderscollective.ca>',
         to: [email],
         replyTo: 'info@coderscollective.ca',
-        subject: 'Welcome to Coders Collective! 🚀',
+        subject: 'Your Spot is Reserved at Coders Collective 💫',
         react: WelcomeEmail(),
       });
   
