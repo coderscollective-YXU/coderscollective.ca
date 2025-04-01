@@ -2,9 +2,6 @@ import { createClient } from 'next-sanity'
 
 import { apiVersion, dataset, projectId, sanityAPIWriteToken } from '../env'
 
-console.log('sanityAPIWriteToken', sanityAPIWriteToken);
-
-
 export const client = createClient({
   projectId,
   dataset,
