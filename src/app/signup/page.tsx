@@ -1,8 +1,5 @@
-"use client";
-
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,28 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import signup from "./actions/signup";
 import MagicIcon from "./magic-icon";
+import SignupForm from "./signupForm";
 
 export default function SignupPage() {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-
-  const handleSubmit = async (formData: FormData) => {
-    startTransition(async () => {
-      const response = await signup(formData);
-      if (response.success) {
-        router.push("/success");
-      }
-    });
-  };
-
   return (
     <>
       <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -57,51 +36,7 @@ export default function SignupPage() {
             </CardHeader>
 
             <CardContent>
-              <form action={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="your@email.com"
-                    
-                    required
-                    disabled={isPending}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="consent"
-                      required
-                      disabled={isPending}
-                    />
-                    <Label htmlFor="consent" className="text-sm">
-                      I agree to receive email updates about Coders
-                      Collective&apos;s launch, upcoming workshops, and
-                      community events. I understand I can unsubscribe at any
-                      time.
-                    </Label>
-                  </div>
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full bg-slate-500"
-                  disabled={isPending}
-                >
-                  {isPending ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing up...
-                    </>
-                  ) : (
-                    "Sign Up for Updates"
-                  )}
-                </Button>
-              </form>
+              <SignupForm /> 
             </CardContent>
 
             <CardFooter className="flex flex-col space-y-4">
