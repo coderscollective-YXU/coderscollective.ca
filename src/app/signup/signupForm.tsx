@@ -15,17 +15,20 @@ const SignupForm = () => {
     error: undefined
   });
   const router = useRouter();
+
   useEffect(() => {
     if (formState.success) {
       const timeout = setTimeout(() => {
-        router.push("/success")
-      }, 4000)
+        router.push("/success");
+      }, 4000);
 
       return () => {
-        clearTimeout(timeout)
-      }
+        clearTimeout(timeout);
+      };
     }
-  }), [formState.success]
+  }, [formState.success, router]);
+
+
   return (
     <form action={formAction} className="space-y-6">
       <div className="space-y-2">

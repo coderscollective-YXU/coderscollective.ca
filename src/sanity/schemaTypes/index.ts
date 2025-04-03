@@ -1,18 +1,20 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { SchemaTypeDefinition } from "sanity";
+import { newsletterSignupType } from "./subscribers";
+import { siteSettings } from "./siteSettings";
+import { homepageSchema } from "./pages/homepage";
+import { linkSchema } from "./objects/linkSchema";
 
-
-export const newsletterSignupType: SchemaTypeDefinition = {
-  name: 'newletterSignup',
-  type: 'document',
-  fields: [
-    {
-      name: 'email',
-      type: 'string',
-    }
-  ],
-}
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [newsletterSignupType],
+  types: [
+    newsletterSignupType,
+    siteSettings,
+    // pages
+    homepageSchema,
+
+
+    // objects
+    linkSchema
+  ],
 }

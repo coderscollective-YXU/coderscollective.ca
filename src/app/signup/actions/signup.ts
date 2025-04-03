@@ -55,6 +55,7 @@ export async function signup(formState: FormState, formData: FormData): Promise<
 
         return { success: true, error: undefined };
       } catch (err) {
+        console.error(err)
         return { success: false, error: "Something went wrong." };
       }
 
