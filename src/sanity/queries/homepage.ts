@@ -3,7 +3,14 @@ import { client } from "../lib/client";
 
 const HOMEPAGE_QUERY = defineQuery(`
   *[_type == "homepage"] [0] {
-    ...
+    ...,
+    "events": events {
+      title,
+      subtitle,
+      "featuredEvents": featuredEvents  [] -> {
+        ...
+      }
+    } 
   }
   `)
 

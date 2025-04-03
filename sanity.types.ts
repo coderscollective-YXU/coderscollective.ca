@@ -280,7 +280,7 @@ export type EXISTING_SUBSCRIBER_QUERYResult = Array<{
 
 // Source: ./src/sanity/queries/homepage.ts
 // Variable: HOMEPAGE_QUERY
-// Query: *[_type == "homepage"] [0] {    ...  }
+// Query: *[_type == "homepage"] [0] {    ...,    "events": events {      title,      subtitle,      "featuredEvents": featuredEvents  [] -> {        ...      }    }   }
 export type HOMEPAGE_QUERYResult = {
   _id: string;
   _type: "homepage";
@@ -357,17 +357,24 @@ export type HOMEPAGE_QUERYResult = {
       };
     };
   };
-  events?: {
+  events: {
     title: string;
     subtitle: string;
-    featuredEvents?: Array<{
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      _key: string;
-      [internalGroqTypeReferenceTo]?: "event";
-    }>;
-  };
+    featuredEvents: Array<{
+      _id: string;
+      _type: "event";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      name: string;
+      date: string;
+      hours: string;
+      link: string;
+      spotsAvailable: number;
+      location: string;
+      eventType: "networking" | "workshop";
+    }> | null;
+  } | null;
 } | null;
 
 // Query TypeMap
@@ -375,6 +382,6 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
-    "\n  *[_type == \"homepage\"] [0] {\n    ...\n  }\n  ": HOMEPAGE_QUERYResult;
+    "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle,\n      \"featuredEvents\": featuredEvents  [] -> {\n        ...\n      }\n    } \n  }\n  ": HOMEPAGE_QUERYResult;
   }
 }

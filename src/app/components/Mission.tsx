@@ -7,7 +7,7 @@ const Mission = ({homepageContent}: {
   if (!homepageContent || !homepageContent.mission) return;
   const {mission} = homepageContent
   return (
-    <section id="mission" className="py-20 bg-secondary">
+    <section id="mission" className="py-[100px] bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{mission.title}</h2>

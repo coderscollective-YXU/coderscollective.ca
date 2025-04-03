@@ -1,4 +1,5 @@
 import CalendarIcon from "@/app/components/icons/CalendarIcon";
+import { formatDate } from "@/lib/utils";
 import { defineField, defineType } from "sanity";
 
 export const eventSchema = defineType({
@@ -70,22 +71,6 @@ export const eventSchema = defineType({
       location: "location"
     },
     prepare({ date, hours, location, name }) {
-      function formatDate(datetimeString: string) {
-        if (!datetimeString) return "No Date";
-        const dateObj = new Date(datetimeString);
-  
-        if (isNaN(dateObj.getTime())) {
-          return "Invalid Date"; // Handle invalid date strings
-        }
-  
-        const options: Intl.DateTimeFormatOptions = {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        };
-  
-        return dateObj.toLocaleDateString(undefined, options);
-      }
   
       return {
         title: `${name} - ${formatDate(date)}`, // Format the date here

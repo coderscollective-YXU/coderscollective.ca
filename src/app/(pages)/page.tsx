@@ -5,16 +5,15 @@ import React from "react";
 import Main from "../components/Main";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import { splitAndStyleCodeAndAi } from "@/lib/utils";
 import Hero from "../components/Hero";
 import Mission from "../components/Mission";
-
-
-
+import About from "../components/About";
+import Programs from "../components/Programs";
+import FeaturedEvents from "../components/FeaturedEvents";
 
 export default async function Home() {
   const homepageContent = await getHomepageContent();
-
+  // console.log({events: homepageContent?.events.featuredEvents})
   return (
     <Main>
       <Navbar />
@@ -52,6 +51,16 @@ export default async function Home() {
           )}
           {homepageContent.mission && (
             <Mission homepageContent={homepageContent} />
+          )}
+
+          {homepageContent.about && (
+            <About homepageContent={homepageContent} />
+          )}
+          {homepageContent.ourPrograms && (
+            <Programs homepageContent={homepageContent} />
+          )}
+          {homepageContent.events && (
+            <FeaturedEvents homepageContent={homepageContent} />
           )}
         </div>
       )}

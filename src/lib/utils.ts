@@ -21,3 +21,20 @@ export const splitAndStyleCodeAndAi = (text: string) => {
 
   return styledWords;
 };
+
+export function formatDate(datetimeString: string) {
+  if (!datetimeString) return "No Date";
+  const dateObj = new Date(datetimeString);
+
+  if (isNaN(dateObj.getTime())) {
+    return "Invalid Date"; // Handle invalid date strings
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  return dateObj.toLocaleDateString(undefined, options);
+}
