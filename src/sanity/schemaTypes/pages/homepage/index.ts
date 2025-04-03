@@ -1,4 +1,4 @@
-import HomeIcon from "@/app/icons/HomeIcon";
+import HomeIcon from "@/app/components/icons/HomeIcon";
 import { defineField, defineType } from "sanity";
 import { missionSchema } from "./mission";
 import { aboutSchema } from "./about";

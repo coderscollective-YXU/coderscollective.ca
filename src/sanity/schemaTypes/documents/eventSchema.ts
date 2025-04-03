@@ -1,4 +1,4 @@
-import CalendarIcon from "@/app/icons/CalendarIcon";
+import CalendarIcon from "@/app/components/icons/CalendarIcon";
 import { defineField, defineType } from "sanity";
 
 export const eventSchema = defineType({

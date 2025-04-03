@@ -1,6 +1,6 @@
 import type { ListItemBuilder, StructureResolver } from "sanity/structure";
 import { siteSettings } from "./schemaTypes/siteSettings";
-import BookIcon from "@/app/icons/BookIcon";
+import BookIcon from "@/app/components/icons/BookIcon";
 import { homepageSchema } from "./schemaTypes/pages/homepage";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet

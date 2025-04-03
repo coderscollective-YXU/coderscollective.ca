@@ -1,11 +1,11 @@
-import EmailIcon from "@/app/icons/EmailIcon";
-import FacebookIcon from "@/app/icons/FacebookIcon";
-import GithubIcon from "@/app/icons/GithubIcon";
-import InstaIcon from "@/app/icons/InstaIcon";
-import LinkedInIcon from "@/app/icons/LinkedInIcon";
-import LinkIcon from "@/app/icons/LinkIcon";
-import SettingsIcon from "@/app/icons/settings";
-import TwitterIcon from "@/app/icons/TwitterIcon";
+import EmailIcon from "@/app/components/icons/EmailIcon";
+import FacebookIcon from "@/app/components/icons/FacebookIcon";
+import GithubIcon from "@/app/components/icons/GithubIcon";
+import InstaIcon from "@/app/components/icons/InstaIcon";
+import LinkedInIcon from "@/app/components/icons/LinkedInIcon";
+import LinkIcon from "@/app/components/icons/LinkIcon";
+import SettingsIcon from "@/app/components/icons/settings";
+import TwitterIcon from "@/app/components/icons/TwitterIcon";
 import { defineType, defineField, defineArrayMember } from "sanity";
 
 export const siteSettings = defineType({
