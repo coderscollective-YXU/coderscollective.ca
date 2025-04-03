@@ -8,32 +8,33 @@ import { Calendar, ChevronRight, Clock, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 
-const FeaturedEvents = ({homepageContent}: {
+const FeaturedEvents = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult
 }) => {
-  const [activeTab, setActiveTab] = useState("upcoming");
-
+  const [activeTab, setActiveTab] = useState("workshop");
 
   if (!homepageContent || !homepageContent.events) return;
-  const {events} = homepageContent
+  const { events } = homepageContent
 
-  // console.log({events})
   return (
     <section id="events" className="py-20">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-10">
+          {activeTab}
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{events.title}</h2>
           <p className="text-lg text-muted-foreground">
             {events.subtitle}
+
           </p>
         </div>
 
-        <Tabs defaultValue="upcoming" className="max-w-4xl mx-auto">
+        <Tabs defaultValue="workshop" className="max-w-4xl mx-auto">
           <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger
               value="workshop"
               onClick={() => setActiveTab("workshop")}
               className={activeTab === "workshop" ? "data-[state=active]:bg-primary" : ""}
+              id="workshop"
             >
               Workshops
             </TabsTrigger>
@@ -96,7 +97,7 @@ const FeaturedEvents = ({homepageContent}: {
           </TabsContent>
 
           <TabsContent value="networking" className="space-y-6">
-          {events.featuredEvents?.filter((event: Event) => event.eventType === "workshop").map((event: Event, index: number) => (
+            {events.featuredEvents?.filter((event: Event) => event.eventType === "networking").map((event: Event, index: number) => (
               <Card key={index} className="overflow-hidden bg-card hover:border-primary/50 transition-colors">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-4">
