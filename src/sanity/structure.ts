@@ -15,7 +15,7 @@ export const structure: StructureResolver = (S) => {
         .documentId(siteSettings.name)
     );
 
-    const homepageListItem = S.listItem()
+  const homepageListItem = S.listItem()
     .title(homepageSchema.title || "")
     .icon(homepageSchema.icon)
     .child(
@@ -28,23 +28,17 @@ export const structure: StructureResolver = (S) => {
   const pages = S.listItem()
     .title("Pages")
     .icon(BookIcon)
-    .child(
-      S.list()
-        .title("Pages")
-        .items([homepageListItem])
-    );
+    .child(S.list().title("Pages").items([homepageListItem]));
 
-    const hiddenDocTypes = (listItem: ListItemBuilder) => {
-      const listItemId = listItem.getId() as "siteSettings" | "homepage";
-    
-      if (listItemId) {
-        return ![siteSettings.name, homepageSchema.name].includes(listItemId);
-      } else {
-        // Handle the case where listItem.getId() is undefined
-        return true; // Or false, depending on your logic
-      }
-    };
-    
+  const hiddenDocTypes = (listItem: ListItemBuilder) => {
+    const listItemId = listItem.getId() as "siteSettings" | "homepage";
+
+    if (listItemId) {
+      return ![siteSettings.name, homepageSchema.name].includes(listItemId);
+    } else {
+      return true;
+    }
+  };
 
   return S.list()
     .title("Content")
