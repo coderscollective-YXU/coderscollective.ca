@@ -6,7 +6,9 @@ const Main = ({ children }: {
 }) => {
   return (
     <main className="min-h-screen w-full bg-transparent relative flex flex-col items-center justify-center antialiased">
-      <BackgroundBeams />
+      <div className="w-full h-screen fixed top-0">
+        <BackgroundBeams />
+      </div>
       {children}
     </main>
 
