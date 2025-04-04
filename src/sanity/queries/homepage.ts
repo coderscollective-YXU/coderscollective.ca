@@ -17,9 +17,6 @@ const HOMEPAGE_QUERY = defineQuery(`
 export const getHomepageContent = async () => {
   try {
     const homepageContent = await client.fetch(HOMEPAGE_QUERY)
-
-    console.log({homepageContent})
-
     return homepageContent
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))

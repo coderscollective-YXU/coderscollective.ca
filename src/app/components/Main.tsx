@@ -7,7 +7,6 @@ const Main = async ({ children }: {
   children: ReactNode
 }) => {
   const footerContent = await getFooterContent();
-  console.log({footerContent})
   return (
     <main className="min-h-screen w-full bg-transparent relative flex flex-col items-center justify-center antialiased">
       <div className="w-full h-screen fixed top-0">

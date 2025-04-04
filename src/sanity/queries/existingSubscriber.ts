@@ -14,7 +14,6 @@ export const getExistintSubscriber = async (email: string) => {
   try {
     const subscriber = await client.fetch(EXISTING_SUBSCRIBER_QUERY, {email})
 
-    console.log({subscriber})
     return subscriber
   } catch (error) {
     throw new Error(JSON.stringify(error))
