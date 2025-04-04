@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { HOMEPAGE_QUERYResult } from "../../../sanity.types";
+import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
 
 const Mission = ({homepageContent}: {
   homepageContent: HOMEPAGE_QUERYResult;

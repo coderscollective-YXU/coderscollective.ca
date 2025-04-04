@@ -5,15 +5,15 @@ import React from "react";
 import Main from "../components/Main";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import Mission from "../components/Mission";
-import About from "../components/About";
-import Programs from "../components/Programs";
-import FeaturedEvents from "../components/FeaturedEvents";
+import Hero from "../components/Homepage/Hero";
+import Mission from "../components/Homepage/Mission";
+import About from "../components/Homepage/About";
+import Programs from "../components/Homepage/Programs";
+import FeaturedEvents from "../components/Homepage/FeaturedEvents";
+import GetInvolved from "../components/Homepage/GetInvolved";
 
 export default async function Home() {
   const homepageContent = await getHomepageContent();
-  // console.log({events: homepageContent?.events.featuredEvents})
   return (
     <Main>
       <Navbar />
@@ -61,6 +61,9 @@ export default async function Home() {
           )}
           {homepageContent.events && (
             <FeaturedEvents homepageContent={homepageContent} />
+          )}
+          {homepageContent.getInvolved && (
+            <GetInvolved homepageContent={homepageContent} />
           )}
         </div>
       )}

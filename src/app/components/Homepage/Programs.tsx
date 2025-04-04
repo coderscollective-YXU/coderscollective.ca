@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { HOMEPAGE_QUERYResult } from "../../../sanity.types";
+import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
 
 const Programs = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult;

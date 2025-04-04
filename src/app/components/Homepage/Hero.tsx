@@ -1,8 +1,8 @@
 "use client";
 import { splitAndStyleCodeAndAi } from "@/lib/utils";
-import { HOMEPAGE_QUERYResult } from "../../../sanity.types";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
 
 const Hero = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult
@@ -16,7 +16,7 @@ const Hero = ({ homepageContent }: {
   };
 
   return (
-    <section className="relative pt-24 pb-32 min-h-screen flex items-center">
+    <section className="relative pt-24 pb-32 min-h-screen flex items-center bg-transparent">
       <div className="container mx-auto px-4 z-10 relative">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">

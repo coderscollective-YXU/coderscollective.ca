@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField } from "sanity";
+import { PreviewIcon } from "./PreviewIcon";
 
 export const getInvolvedSchema = defineField({
   name: "getInvolved",
@@ -52,15 +53,27 @@ export const getInvolvedSchema = defineField({
               title: "cta",
               type: "linkObject",
             }),
-          ]
-        })
-      ]
+          ],
+          preview: {
+            select: {
+              title: "title",
+              icon: "icon",
+            },
+            prepare({ title, icon }) {
+              return {
+                title,
+                media: PreviewIcon({ icon }),
+              };
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "startCoding",
       title: "Start Coding",
       type: "object",
-      fields:[
+      fields: [
         defineField({
           name: "title",
           title: "Title",
@@ -83,7 +96,7 @@ export const getInvolvedSchema = defineField({
           title: "cta 2",
           type: "linkObject",
         }),
-      ]
-    })
-  ]
-})
+      ],
+    }),
+  ],
+});

@@ -1,4 +1,4 @@
-import { HOMEPAGE_QUERYResult } from "../../../sanity.types";
+import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
 
 const About = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult;

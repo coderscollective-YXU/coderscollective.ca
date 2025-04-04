@@ -3,6 +3,7 @@ import { defineField, defineType } from "sanity";
 import { missionSchema } from "./mission";
 import { aboutSchema } from "./about";
 import { programsSchema } from "./programs";
+import { getInvolvedSchema } from "./getInvolved";
 
 export const homepageSchema = defineType({
   name: "homepage",
@@ -108,6 +109,7 @@ export const homepageSchema = defineType({
         })
       ],
     }),
+    getInvolvedSchema
   ],
   preview: {
     select: {

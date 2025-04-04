@@ -242,6 +242,24 @@ export type Homepage = {
       [internalGroqTypeReferenceTo]?: "event";
     }>;
   };
+  getInvolved?: {
+    title: string;
+    subtitle: string;
+    cards?: Array<{
+      icon: string;
+      title: string;
+      subtitle: string;
+      cta?: LinkObject;
+      _type: "card";
+      _key: string;
+    }>;
+    startCoding?: {
+      title: string;
+      subtitle: string;
+      cta1?: LinkObject;
+      cta2?: LinkObject;
+    };
+  };
 };
 
 export type LinkObject = {
@@ -375,6 +393,24 @@ export type HOMEPAGE_QUERYResult = {
       eventType: "networking" | "workshop";
     }> | null;
   } | null;
+  getInvolved?: {
+    title: string;
+    subtitle: string;
+    cards?: Array<{
+      icon: string;
+      title: string;
+      subtitle: string;
+      cta?: LinkObject;
+      _type: "card";
+      _key: string;
+    }>;
+    startCoding?: {
+      title: string;
+      subtitle: string;
+      cta1?: LinkObject;
+      cta2?: LinkObject;
+    };
+  };
 } | null;
 
 // Query TypeMap

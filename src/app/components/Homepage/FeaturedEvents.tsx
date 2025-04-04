@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { HOMEPAGE_QUERYResult, Event } from "../../../sanity.types";
+import { HOMEPAGE_QUERYResult, Event } from "../../../../sanity.types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, ChevronRight, Clock, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";

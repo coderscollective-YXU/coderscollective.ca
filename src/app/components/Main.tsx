@@ -5,9 +5,9 @@ const Main = ({ children }: {
   children: ReactNode
 }) => {
   return (
-    <main className="min-h-screen w-full  bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-      {children}
+    <main className="min-h-screen w-full bg-transparent relative flex flex-col items-center justify-center antialiased">
       <BackgroundBeams />
+      {children}
     </main>
 
   );
