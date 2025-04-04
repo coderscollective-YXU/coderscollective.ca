@@ -3,13 +3,11 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <div className='text-xl text-neutral-50 flex items-center'>
-      <div className='m-2'>
-        <MagicIcon variant='dark' />
-      </div>
-      <div>
+    <div className='text-xl text-neutral-50 flex gap-2 items-center'>
+      <MagicIcon variant='dark' />
+      <div className=''>
         <div>Coders</div>
-        <div className=''>Collective</div>
+        <div>Collective</div>
       </div>
     </div>
   );

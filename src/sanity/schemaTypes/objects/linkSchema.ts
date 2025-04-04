@@ -1,9 +1,11 @@
+import { LinkIcon } from 'lucide-react';
 import { defineType, defineField } from 'sanity';
 
 export const linkSchema = defineType({
   name: 'linkObject', 
   title: 'Link', 
   type: 'object',
+  icon: LinkIcon,
   fields: [
     defineField({
       name: 'type',
@@ -40,4 +42,16 @@ export const linkSchema = defineType({
         }),
     }),
   ],
+  preview: {
+    select: {
+      title: "text",
+      subtitle: "url"
+    },
+    prepare ({title, subtitle}) {
+      return {
+        title,
+        subtitle
+      }
+    }
+  }
 });

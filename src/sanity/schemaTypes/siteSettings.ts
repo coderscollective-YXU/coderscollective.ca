@@ -7,6 +7,7 @@ import LinkIcon from "@/app/components/icons/LinkIcon";
 import SettingsIcon from "@/app/components/icons/settings";
 import TwitterIcon from "@/app/components/icons/TwitterIcon";
 import { defineType, defineField, defineArrayMember } from "sanity";
+import { footerSchema } from "./footer";
 
 export const siteSettings = defineType({
   name: "siteSettings",
@@ -99,5 +100,6 @@ export const siteSettings = defineType({
         }),
       ],
     }),
+    footerSchema
   ],
 });

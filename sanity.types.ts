@@ -284,6 +284,20 @@ export type SiteSettings = {
     _type: "link";
     _key: string;
   }>;
+  footer: {
+    footerMessage: string;
+    resources?: Array<{
+      _key: string;
+    } & LinkObject>;
+    company?: Array<{
+      _key: string;
+    } & LinkObject>;
+    subscribe: {
+      title: string;
+      subtitle: string;
+      linkText: string;
+    };
+  };
 };
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData | NewletterSignup | Event | Homepage | LinkObject | SiteSettings;
@@ -413,11 +427,39 @@ export type HOMEPAGE_QUERYResult = {
   };
 } | null;
 
+// Source: ./src/sanity/queries/siteSettings.ts
+// Variable: FOOTER_QUERY
+// Query: *[_type == "siteSettings"] [0] {    socialLinks,    footer  }
+export type FOOTER_QUERYResult = {
+  socialLinks: Array<{
+    title: string;
+    url: string;
+    linkType: "email" | "facebook" | "github" | "instagram" | "link" | "linkedin" | "twitter";
+    _type: "link";
+    _key: string;
+  }> | null;
+  footer: {
+    footerMessage: string;
+    resources?: Array<{
+      _key: string;
+    } & LinkObject>;
+    company?: Array<{
+      _key: string;
+    } & LinkObject>;
+    subscribe: {
+      title: string;
+      subtitle: string;
+      linkText: string;
+    };
+  };
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
     "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle,\n      \"featuredEvents\": featuredEvents  [] -> {\n        ...\n      }\n    } \n  }\n  ": HOMEPAGE_QUERYResult;
+    "\n  *[_type == \"siteSettings\"] [0] {\n    socialLinks,\n    footer\n  }\n  ": FOOTER_QUERYResult;
   }
 }
