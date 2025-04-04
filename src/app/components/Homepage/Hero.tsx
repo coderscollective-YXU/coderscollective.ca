@@ -3,6 +3,7 @@ import { splitAndStyleCodeAndAi } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
+import Link from "next/link";
 
 const Hero = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult
@@ -35,30 +36,26 @@ const Hero = ({ homepageContent }: {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              // onClick={() => {
-              //   const eventsSection = document.getElementById("events");
-              //   if (eventsSection) {
-              //     eventsSection.scrollIntoView({ behavior: "smooth" });
-              //   }
-              // }}
-              className="bg-primary hover:bg-primary/90"
-              size="lg"
-            >
-              Upcoming Events
-            </Button>
-            <Button
-              // onClick={() => {
-              //   const aboutSection = document.getElementById("about");
-              //   if (aboutSection) {
-              //     aboutSection.scrollIntoView({ behavior: "smooth" });
-              //   }
-              // }}
-              variant="outline"
-              size="lg"
-            >
-              Learn More here
-            </Button>
+            {homepageContent.hero.cta1 && (
+              <Link href={homepageContent.hero.cta1.url}>
+                <Button
+                  className="bg-primary hover:bg-primary/90"
+                  size="lg"
+                >
+                  {homepageContent.hero.cta1.text}
+                </Button>
+              </Link>
+            )}
+            {homepageContent.hero.cta2 && (
+              <Link href={homepageContent.hero.cta2.url}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                >
+                  {homepageContent.hero.cta2.text}
+                </Button>
+              </Link>
+            )}
           </div>
 
           <div className="mt-20 animate-bounce">
