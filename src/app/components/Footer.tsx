@@ -66,9 +66,9 @@ const Footer = ({ content }: {
               <ul className="space-y-3">
                 {footer.company.map(link => (
                   <li key={link._key}>
-                    <a href={link.url} className="text-muted-foreground hover:text-primary transition-colors">
+                    <Link href={link.url} className="text-muted-foreground hover:text-primary transition-colors">
                       {link.text}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
