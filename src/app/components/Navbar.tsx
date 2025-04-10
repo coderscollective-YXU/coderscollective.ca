@@ -36,10 +36,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
           ? "bg-background/90 backdrop-blur-md shadow-md"
           : "bg-transparent"
-        }`}
+      }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
         <Logo />
@@ -114,13 +115,23 @@ const MobileMenu = ({
     <div className="md:hidden bg-secondary absolute top-[100px] left-0 w-full">
       <div className="px-4 py-5 flex flex-col space-y-5">
         {sections.map((section) => (
-          <button
-            key={section}
-            onClick={() => scrollToSection(section)}
-            className="text-sm font-medium py-2 hover:text-primary"
-          >
-            {section}
-          </button>
+          <div key={section}>
+            {section === "about" ? (
+              <Link
+                href={"/about"}
+                className="text-sm capitalize font-medium hover:text-primary transition-colors"
+              >
+                {section}
+              </Link>
+            ) : (
+              <button
+                onClick={() => scrollToSection(section)}
+                className="text-sm capitalize font-medium hover:text-primary transition-colors"
+              >
+                {section}
+              </button>
+            )}
+          </div>
         ))}
         <Button
           onClick={() => scrollToSection("get-involved")}

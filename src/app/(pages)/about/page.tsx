@@ -39,7 +39,7 @@ const FounderCard = ({ founder }: FounderCardProps) => {
 
         {founder.links && founder.links.length > 0 && (
           <ul className="flex gap-3 pt-2">
-            {founder.links.map((link, index) => (
+            {founder.links.map((link) => (
               <li
                 key={link._key}
               >

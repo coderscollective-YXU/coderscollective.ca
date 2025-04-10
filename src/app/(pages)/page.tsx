@@ -4,7 +4,6 @@ import { getHomepageContent } from "@/sanity/queries/homepage";
 import React from "react";
 import Main from "../components/Main";
 import Link from "next/link";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Homepage/Hero";
 import Mission from "../components/Homepage/Mission";
 import About from "../components/Homepage/About";
