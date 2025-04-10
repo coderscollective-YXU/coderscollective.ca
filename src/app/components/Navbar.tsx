@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
-const navSections = ["mission", "about", "programs", "events"]
+const navSections = ["mission", "about", "programs", "events"];
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       closeMenu();
     }
   };
@@ -36,8 +37,8 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? "bg-background/90 backdrop-blur-md shadow-md"
-        : "bg-transparent"
+          ? "bg-background/90 backdrop-blur-md shadow-md"
+          : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
@@ -47,7 +48,11 @@ const Navbar = () => {
         <button className="md:hidden text-foreground" onClick={toggleMenu}>
           {isMenuOpen ? <X /> : <Menu />}
         </button>
-        <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} sections={navSections} />
+        <MobileMenu
+          isMenuOpen={isMenuOpen}
+          scrollToSection={scrollToSection}
+          sections={navSections}
+        />
       </div>
     </nav>
   );
@@ -55,44 +60,60 @@ const Navbar = () => {
 
 export default Navbar;
 
-
-const DesktopMenu = ({ scrollToSection, sections }: {
+const DesktopMenu = ({
+  scrollToSection,
+  sections,
+}: {
   scrollToSection: (id: string) => void;
   sections: string[];
 }) => {
   return (
     <div className="hidden md:flex items-center space-x-8">
-      {sections.map(section => (
-
-        <button
-          key={section}
-          onClick={() => scrollToSection(section)}
-          className="text-sm capitalize font-medium hover:text-primary transition-colors"
-        >
-          {section}
-        </button>
+      {sections.map((section) => (
+        <div key={section}>
+          {section === "about" ? (
+            <Link
+              href={"/about"}
+              className="text-sm capitalize font-medium hover:text-primary transition-colors"
+            >
+              {section}
+            </Link>
+          ) : (
+            <button
+              onClick={() => scrollToSection(section)}
+              className="text-sm capitalize font-medium hover:text-primary transition-colors"
+            >
+              {section}
+            </button>
+          )}
+        </div>
       ))}
 
-      <Button onClick={() => scrollToSection('get-involved')} className="bg-primary hover:bg-primary/90">
+      <Button
+        onClick={() => scrollToSection("get-involved")}
+        className="bg-primary hover:bg-primary/90"
+      >
         Get Involved
       </Button>
-
     </div>
-  )
+  );
 };
 
-const MobileMenu = ({ isMenuOpen, scrollToSection, sections }: {
+const MobileMenu = ({
+  isMenuOpen,
+  scrollToSection,
+  sections,
+}: {
   isMenuOpen: boolean;
   scrollToSection: (id: string) => void;
   sections: string[];
 }) => {
-
   if (!isMenuOpen) return;
 
   return (
     <div className="md:hidden bg-secondary absolute top-[100px] left-0 w-full">
       <div className="px-4 py-5 flex flex-col space-y-5">
-        {sections.map(section => (
+        {sections.map((section) => (
           <button
             key={section}
             onClick={() => scrollToSection(section)}
@@ -101,10 +122,13 @@ const MobileMenu = ({ isMenuOpen, scrollToSection, sections }: {
             {section}
           </button>
         ))}
-        <Button onClick={() => scrollToSection('get-involved')} className="bg-primary hover:bg-primary/90">
+        <Button
+          onClick={() => scrollToSection("get-involved")}
+          className="bg-primary hover:bg-primary/90"
+        >
           Get Involved
         </Button>
       </div>
     </div>
-  )
+  );
 };

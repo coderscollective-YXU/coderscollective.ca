@@ -16,7 +16,6 @@ export default async function Home() {
   const homepageContent = await getHomepageContent();
   return (
     <Main>
-      <Navbar />
       {!homepageContent ? (
         <>
           <div className="relative z-10">

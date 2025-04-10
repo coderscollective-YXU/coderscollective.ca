@@ -12,7 +12,7 @@ const HOMEPAGE_QUERY = defineQuery(`
       }
     } 
   }
-  `)
+`)
 
 export const getHomepageContent = async () => {
   try {
