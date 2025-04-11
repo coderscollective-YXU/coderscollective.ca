@@ -1,8 +1,9 @@
-import HomeIcon from "@/app/icons/HomeIcon";
+import HomeIcon from "@/app/components/icons/HomeIcon";
 import { defineField, defineType } from "sanity";
 import { missionSchema } from "./mission";
 import { aboutSchema } from "./about";
 import { programsSchema } from "./programs";
+import { getInvolvedSchema } from "./getInvolved";
 
 export const homepageSchema = defineType({
   name: "homepage",
@@ -18,6 +19,9 @@ export const homepageSchema = defineType({
     },
     {
       name: "content",
+    },
+    {
+      name: "events",
     },
   ],
   fields: [
@@ -61,19 +65,51 @@ export const homepageSchema = defineType({
         }),
         defineField({
           name: "cta1",
-          title: "cta",
+          title: "cta 1",
           type: "linkObject",
         }),
         defineField({
           name: "cta2",
-          title: "cta",
+          title: "cta 2",
           type: "linkObject",
         }),
       ],
     }),
     missionSchema,
     aboutSchema,
-    programsSchema
+    programsSchema,
+    defineField({
+      name: "events",
+      title: "Events",
+      type: "object",
+      group: ["events"],
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+          validation: (R) => R.required(),
+        }),
+        defineField({
+          name: "subtitle",
+          title: "Subtitle",
+          type: "string",
+          validation: (R) => R.required(),
+        }),
+        defineField({
+          name: "featuredEvents",
+          title: "Featured Events",
+          type: "array",
+          of: [
+            {
+              type: "reference",
+              to: [{type: "event"}]
+            }
+          ]
+        })
+      ],
+    }),
+    getInvolvedSchema
   ],
   preview: {
     select: {

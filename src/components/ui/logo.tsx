@@ -1,17 +1,16 @@
-import MagicIcon from '@/app/signup/magic-icon';
+import MagicIcon from '@/app/(pages)/signup/magic-icon';
+import Link from 'next/link';
 import React from "react";
 
 const Logo = () => {
   return (
-    <div className='text-xl text-neutral-50 flex mb-[5rem] items-center'>
-      <div className='m-2'>
-        <MagicIcon variant='dark' />
-      </div>
-      <div>
+    <Link href={"/"} className='text-xl text-neutral-50 flex gap-2 items-center'>
+      <MagicIcon variant='dark' />
+      <div className=''>
         <div>Coders</div>
-        <div className='mt-[-5px]'>Collective</div>
+        <div>Collective</div>
       </div>
-    </div>
+    </Link>
   );
 };
 
