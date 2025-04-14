@@ -40,7 +40,7 @@ export default async function Home() {
           </div>
         </>
       ) : (
-        <div className='relative z-10 flex flex-col'>
+        <div className='relative z-10 flex flex-col px-16'>
           {homepageContent.hero && <Hero homepageContent={homepageContent} />}
           {homepageContent.events && (
             <FeaturedEvents homepageContent={homepageContent} />
