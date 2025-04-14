@@ -23,7 +23,6 @@ const Hero = ({ homepageContent }: {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             {splitAndStyleCodeAndAi(homepageContent.hero.title)?.map((wordObj, index) => {
               const insertBreak = wordObj.text === "Code" && index < splitAndStyleCodeAndAi(homepageContent.hero?.title ?? "")?.length - 1;
-              
               return (
                 <span
                   key={index}

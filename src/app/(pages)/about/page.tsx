@@ -16,43 +16,47 @@ type FounderCardProps = {
 const FounderCard = ({ founder }: FounderCardProps) => {
   return (
     <Card className="glass-card overflow-hidden backdrop-blur-lg border-white/10 hover:shadow-lg transition-all h-fit">
-      <div className="relative h-48 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 z-10" />
-        <Image
-          src={urlFor(founder.image).width(281).height(192).format('webp').quality(100).url()}
-          alt={`${founder.name}`}
-          className="w-full h-full object-cover"
-          width={281}
-          height={192}
-        />
-      </div>
-      <CardHeader className="relative z-20 -mt-16 flex items-center pb-0">
-        <div className="ml-4">
-          <h3 className="text-2xl font-bold">{founder.name}</h3>
-          <p className="text-primary/80">{founder.role}</p>
+      <div className="flex flex-col md:flex-row h-full">
+        <div className="relative md:w-[300px] h-48 md:h-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 z-10" />
+          <Image
+            src={urlFor(founder.image).width(300).height(300).format('webp').quality(100).url()}
+            alt={`${founder.name}`}
+            className="w-full h-full object-cover"
+            width={300}
+            height={300}
+          />
         </div>
-      </CardHeader>
-      <CardContent className="pt-4 space-y-4 flex flex-col">
-        <ViewMoreCard>
-          <SanityContentBlock blocks={founder.bio} />
-        </ViewMoreCard>
+        <div className="flex-1">
+          <CardHeader className="relative z-20 md:ml-0 flex items-start pb-0">
+            <div>
+              <h3 className="text-2xl font-bold">{founder.name}</h3>
+              <p className="text-primary/80">{founder.role}</p>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-4 space-y-4 flex flex-col">
+            <ViewMoreCard>
+              <SanityContentBlock blocks={founder.bio} />
+            </ViewMoreCard>
 
-        {founder.links && founder.links.length > 0 && (
-          <ul className="flex gap-3 pt-2">
-            {founder.links.map((link) => (
-              <li
-                key={link._key}
-              >
-                <Link
-                  href={link.link.url}
-                >
-                  <div dangerouslySetInnerHTML={{ __html: link.icon }} className="h-6 w-6" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </CardContent>
+            {founder.links && founder.links.length > 0 && (
+              <ul className="flex gap-3 pt-2">
+                {founder.links.map((link) => (
+                  <li
+                    key={link._key}
+                  >
+                    <Link
+                      href={link.link.url}
+                    >
+                      <div dangerouslySetInnerHTML={{ __html: link.icon }} className="h-6 w-6" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </CardContent>
+        </div>
+      </div>
     </Card>
   );
 };
@@ -90,7 +94,7 @@ const AboutPage = async () => {
         <section className="py-12 md:py-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-12 text-center">{pageContent.ourTeam.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col gap-8">
               {pageContent.ourTeam.members.map((founder, index) => (
                 <FounderCard
                   key={`${founder._id}-${index}`}
