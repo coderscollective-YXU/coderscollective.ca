@@ -5,7 +5,6 @@ import React from "react";
 import Main from "../components/Main";
 import Link from "next/link";
 import Hero from "../components/Homepage/Hero";
-import Mission from "../components/Homepage/Mission";
 import About from "../components/Homepage/About";
 import Programs from "../components/Homepage/Programs";
 import FeaturedEvents from "../components/Homepage/FeaturedEvents";
@@ -46,9 +45,9 @@ export default async function Home() {
           {homepageContent.events && (
             <FeaturedEvents homepageContent={homepageContent} />
           )}
-          {homepageContent.mission && (
+          {/* {homepageContent.mission && (
             <Mission homepageContent={homepageContent} />
-          )}
+          )} */}
 
           {homepageContent.about && <About homepageContent={homepageContent} />}
           {homepageContent.ourPrograms && (

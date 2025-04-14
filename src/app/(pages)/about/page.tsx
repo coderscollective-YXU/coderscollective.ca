@@ -69,12 +69,11 @@ const AboutPage = async () => {
   return (
     <Main>
       {pageContent.hero && (
-        <section className="py-20 relative overflow-hidden">
+        <section className="mt-16 py-20 relative overflow-hidden">
           <div className="absolute inset-0 z-0 opacity-20">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 mix-blend-multiply" />
             <div className="h-full w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-background to-background"></div>
           </div>
-
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">{pageContent.hero.title}</h1>
@@ -103,20 +102,7 @@ const AboutPage = async () => {
         </section>
       )}
 
-      {/* Vision Section */}
-      {pageContent.vision && (
-
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6">{pageContent.vision.title}</h2>
-              <div className="glass-card p-8 rounded-xl flex flex-col gap-5">
-                <SanityContentBlock blocks={pageContent.vision.description} />
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      
     </Main >
 
   );
