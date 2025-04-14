@@ -46,7 +46,10 @@ export default function SignupPage() {
                   to send you updates about Coders Collective&apos;s launch and
                   upcoming events. Your information will never be shared with
                   third parties. You can unsubscribe at any time using the link
-                  in our emails.
+                  in our emails. For more details, see our{" "}
+                  <a href="/privacy-policy" className="text-blue-500 hover:underline">
+                    Privacy Policy
+                  </a>.
                 </AlertDescription>
               </Alert>
 

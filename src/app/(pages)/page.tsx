@@ -9,6 +9,7 @@ import About from "../components/Homepage/About";
 import Programs from "../components/Homepage/Programs";
 import FeaturedEvents from "../components/Homepage/FeaturedEvents";
 import GetInvolved from "../components/Homepage/GetInvolved";
+import Sponsors from "../components/Homepage/Sponsors";
 
 export default async function Home() {
   const homepageContent = await getHomepageContent();
@@ -50,6 +51,9 @@ export default async function Home() {
           )} */}
 
           {homepageContent.about && <About homepageContent={homepageContent} />}
+
+          <Sponsors />
+          
           {homepageContent.ourPrograms && (
             <Programs homepageContent={homepageContent} />
           )}
@@ -57,6 +61,8 @@ export default async function Home() {
           {homepageContent.getInvolved && (
             <GetInvolved homepageContent={homepageContent} />
           )}
+
+
         </div>
       )}
     </Main>
