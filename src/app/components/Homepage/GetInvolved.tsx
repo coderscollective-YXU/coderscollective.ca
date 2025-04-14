@@ -35,9 +35,9 @@ const GetInvolved = ({
           {getInvolved.cards?.map((card, index) => (
             <Card
               key={index}
-              className='bg-transparent border-none shadow-none'
+              className='bg-transparent border-none shadow-none h-full flex flex-col'
             >
-              <CardContent className='p-0'>
+              <CardContent className='p-0 h-full flex flex-col'>
                 <div
                   className={`rounded-xl p-8 text-center bg-gradient-to-b ${colors[index]} glass-card h-full flex flex-col`}
                 >
