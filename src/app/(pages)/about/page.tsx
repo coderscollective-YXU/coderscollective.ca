@@ -7,7 +7,6 @@ import { urlFor } from '@/sanity/lib/image';
 import SanityContentBlock from '@/app/components/SanityContentBlock';
 import Link from 'next/link';
 import Image from 'next/image';
-import ViewMoreCard from './ViewMoreCard';
 
 type FounderCardProps = {
   founder: TeamMember
@@ -35,9 +34,7 @@ const FounderCard = ({ founder }: FounderCardProps) => {
             </div>
           </CardHeader>
           <CardContent className="pt-4 space-y-4 flex flex-col">
-            <ViewMoreCard>
-              <SanityContentBlock blocks={founder.bio} />
-            </ViewMoreCard>
+            <SanityContentBlock blocks={founder.bio} />
 
             {founder.links && founder.links.length > 0 && (
               <ul className="flex gap-3 pt-2">
