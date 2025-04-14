@@ -25,8 +25,9 @@ export async function signup(formState: FormState, formData: FormData): Promise<
     }
 
     const existingSubscriber = await getExistintSubscriber(data.email)
+    
 
-    if (existingSubscriber) {
+    if (existingSubscriber.length !== 0) {
       return {
         success: false,
         error: "You are already subscribed!"
