@@ -8,7 +8,7 @@ const Logo = () => {
       <MagicIcon variant='dark' />
       <div className=''>
         <div>Coders</div>
-        <div>Collective</div>
+        <div style={{ marginTop: '-10px' }}>Collective</div>
       </div>
     </Link>
   );

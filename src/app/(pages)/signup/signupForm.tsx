@@ -7,12 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SignupForm = () => {
-
   const [formState, formAction, isPending] = useActionState(signup, {
     success: false,
-    error: undefined
+    error: undefined,
   });
   const router = useRouter();
 
@@ -28,60 +28,98 @@ const SignupForm = () => {
     }
   }, [formState.success, router]);
 
-
   return (
-    <form action={formAction} className="space-y-6">
-      <div className="space-y-2">
-        <Label htmlFor="email">Email address</Label>
-        <Input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="your@email.com"
+    <form action={formAction} className='space-y-6 mt-4'>
+      <div className='space-y-2'>
+        <div className='space-y-3'>
+          <Label>I&apos;m interested in:</Label>
+          <div className='flex items-center space-x-2'>
+            <Checkbox id='isMember' name='isMember' disabled={isPending} />
+            <Label htmlFor='isMember' className='text-sm'>
+              Member (Newsletter updates)
+            </Label>
+          </div>
 
+          <div className='flex items-center space-x-2'>
+            <Checkbox
+              id='isVolunteer'
+              name='isVolunteer'
+              disabled={isPending}
+            />
+            <Label htmlFor='isVolunteer' className='text-sm'>
+              Volunteer (Teach or Mentor)
+            </Label>
+          </div>
+
+          <div className='flex items-center space-x-2'>
+            <Checkbox id='isSponsor' name='isSponsor' disabled={isPending} />
+            <Label htmlFor='isSponsor' className='text-sm'>
+              Sponsorship opportunities
+            </Label>
+          </div>
+        </div>
+        <div className='space-y-2'>
+        <Label htmlFor='email'>Email address</Label>
+        <Input
+          id='email'
+          type='email'
+          name='email'
+          placeholder='your@email.com'
           required
           disabled={isPending}
         />
+        </div>
+        
       </div>
-
-      <div className="space-y-2">
-        <div className="flex items-center space-x-2">
+      <div className='space-y-2'>
+        <div className='flex items-center space-x-2'>
           <Checkbox
-            id="consent"
+            id='privacyConsent'
+            name='privacyConsent'
             required
             disabled={isPending}
           />
-          <Label htmlFor="consent" className="text-sm">
-            I agree to receive email updates about Coders
-            Collective&apos;s launch, upcoming workshops, and
-            community events. I understand I can unsubscribe at any
-            time.
+          <Label htmlFor='privacyConsent' className='text-sm'>
+            I agree to the{" "}
+            <Link
+              target='_blank'
+              href='/privacy-policy'
+              className='text-blue-500 hover:underline'
+            >
+              Privacy Policy
+            </Link>{" "}
+            and the{" "}
+            <Link
+              target='_blank'
+              href='/code-of-conduct'
+              className='text-blue-500 hover:underline'
+            >
+              Code of Conduct
+            </Link>
           </Label>
         </div>
       </div>
 
       <Button
-        type="submit"
-        className="w-full bg-slate-500"
+        type='submit'
+        className='w-full bg-slate-500'
         disabled={isPending}
       >
         {isPending ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
             Signing up...
           </>
         ) : (
-          "Sign Up for Updates"
+          "Sign Up"
         )}
       </Button>
       {formState.success && (
-        <p className="text-green-600">✔️ Email saved successfully</p>
+        <p className='text-green-600'>✔️ Email saved successfully</p>
       )}
-      {formState.error && (
-        <p className="text-red-600">{formState.error}</p>
-      )}
+      {formState.error && <p className='text-red-600'>{formState.error}</p>}
     </form>
   );
-}
+};
 
 export default SignupForm;

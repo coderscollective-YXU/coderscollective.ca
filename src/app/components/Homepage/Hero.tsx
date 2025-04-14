@@ -21,15 +21,18 @@ const Hero = ({ homepageContent }: {
       <div className="container mx-auto px-4 z-10 relative">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-            {splitAndStyleCodeAndAi(homepageContent.hero.title)?.map((wordObj, index) => (
-              <span
-                key={index}
-                className={wordObj.isStyled ? "gradient-text" : ""}
-              >
-                {wordObj.text}
-                {index < splitAndStyleCodeAndAi(homepageContent.hero?.title ?? "")?.length - 1 && ' '}
-              </span>
-            ))}
+            {splitAndStyleCodeAndAi(homepageContent.hero.title)?.map((wordObj, index) => {
+              const insertBreak = wordObj.text === "Code" && index < splitAndStyleCodeAndAi(homepageContent.hero?.title ?? "")?.length - 1;
+              return (
+                <span
+                  key={index}
+                  className={wordObj.isStyled ? "gradient-text" : ""}
+                >
+                  {wordObj.text}
+                  {insertBreak ? <br /> : index < splitAndStyleCodeAndAi(homepageContent.hero?.title ?? "")?.length - 1 && ' '}
+                </span>
+              );
+            })}
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             {homepageContent.hero.subtitle}

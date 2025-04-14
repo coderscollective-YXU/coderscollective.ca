@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
-const navSections = ["mission", "about", "programs", "events"];
+const navSections = ["about", "programs", "events"];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
