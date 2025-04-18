@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, ChevronRight, Clock, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
-
+import Link from "next/link";
 const FeaturedEvents = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult
 }) => {
@@ -92,8 +92,8 @@ const FeaturedEvents = ({ homepageContent }: {
                 ))}
 
                 <div className="text-center pt-6">
-                  <Button variant="outline" className="inline-flex items-center gap-1">
-                    View All Events <ChevronRight className="h-4 w-4" />
+                  <Button variant="outline" className="inline-flex items-center gap-1" asChild>
+                    <Link href="/events">View All Events <ChevronRight className="h-4 w-4" /></Link>
                   </Button>
                 </div>
               </>

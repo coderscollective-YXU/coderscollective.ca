@@ -5,9 +5,30 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
-const navSections = ["about", "programs", "events"];
+const navSections = [
+  {
+    label: "Upcoming Events",
+    href: "/events",
+  },
+  {
+    label: "Programs",
+    href: "/programs",
+  },
+  {
+    label: "Resources",
+    href: "/resources",
+  },  
+  {
+    label: "About",
+    href: "/about",
+  },
+  {
+    label: "Join",  
+    href: "/join",
+  },
+];
 
-const Navbar = () => {
+  const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -67,25 +88,32 @@ const DesktopMenu = ({
   sections,
 }: {
   scrollToSection: (id: string) => void;
-  sections: string[];
+  sections: { label: string; href: string }[];
 }) => {
   return (
     <div className="hidden md:flex items-center space-x-8">
       {sections.map((section) => (
-        <div key={section}>
-          {section === "about" ? (
+        <div key={section.label}>
+          {["about", "resources"].includes(section.label) ? (
             <Link
-              href={"/about"}
+              href={`/${section.href}`}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
-              {section}
+              {section.label}
+            </Link>
+          ) : section.label === "Join" ? (
+            <Link
+              href="/signup"
+              className="text-sm capitalize font-medium hover:text-primary transition-colors"
+            >
+              Join Us
             </Link>
           ) : (
             <button
-              onClick={() => scrollToSection(section)}
+              onClick={() => scrollToSection(section.href)}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
-              {section}
+              {section.label}
             </button>
           )}
         </div>
@@ -108,7 +136,7 @@ const MobileMenu = ({
 }: {
   isMenuOpen: boolean;
   scrollToSection: (id: string) => void;
-  sections: string[];
+  sections: { label: string; href: string }[];
 }) => {
   if (!isMenuOpen) return;
 
@@ -116,20 +144,27 @@ const MobileMenu = ({
     <div className="md:hidden bg-secondary absolute top-[100px] left-0 w-full">
       <div className="px-4 py-5 flex flex-col space-y-5">
         {sections.map((section) => (
-          <div key={section}>
-            {section === "about" ? (
+          <div key={section.label}>
+            {["about", "resources"].includes(section.label) ? (
               <Link
-                href={"/about"}
+                href={`/${section.href}`}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
-                {section}
+                {section.label}
+              </Link>
+            ) : section.label === "Join" ? (
+              <Link
+                href="/signup"
+                className="text-sm capitalize font-medium hover:text-primary transition-colors"
+              >
+                Join Us
               </Link>
             ) : (
               <button
-                onClick={() => scrollToSection(section)}
+                onClick={() => scrollToSection(section.href)}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
-                {section}
+                {section.label}
               </button>
             )}
           </div>
