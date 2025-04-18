@@ -25,20 +25,6 @@ export const EventList = ({
   const workshopEvents = events.filter(event => event.eventType === "workshop");
   const networkingEvents = events.filter(event => event.eventType === "networking");
 
-  // Calculate the height based on the tab with the most content
-  const calculateContentHeight = () => {
-    const workshopHeight = workshopEvents.length > 0 
-      ? workshopEvents.length * 180 // Approximate height per event card
-      : 300; // Height for "no events" card
-      
-    const networkingHeight = networkingEvents.length > 0
-      ? networkingEvents.length * 180
-      : 300;
-      
-    return Math.max(workshopHeight, networkingHeight);
-  };
-
-  const contentHeight = calculateContentHeight();
 
   return (
     <Tabs defaultValue="workshop" className="max-w-4xl mx-auto">
@@ -59,11 +45,10 @@ export const EventList = ({
         </TabsTrigger>
       </TabsList>
 
-      {/* Container with fixed height */}
-      <div style={{ height: `${contentHeight}px`, position: 'relative' }}>
+      <div>
         <TabsContent 
           value="workshop" 
-          className="space-y-6 absolute top-0 left-0 w-full"
+          className="space-y-6 w-full"
         >
           {workshopEvents.length > 0 ? (
             <>
@@ -92,7 +77,7 @@ export const EventList = ({
 
         <TabsContent 
           value="networking" 
-          className="space-y-6 absolute top-0 left-0 w-full"
+          className="space-y-6 w-full"
         >
           {networkingEvents.length > 0 ? (
             <>
