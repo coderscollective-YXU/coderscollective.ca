@@ -20,7 +20,6 @@ export default async function EventsPage() {
               Join us for upcoming workshops and networking events
             </p>
           </div>
-
           <EventList 
             events={allEvents || []} 
             showViewAll={false}

@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import { client } from "../lib/client";
 
 const ALL_EVENTS_QUERY = defineQuery(`
-  *[_type == "event"] | order(date desc) {
+  *[_type == "event" && date >= now()] | order(date asc) {
     ...
   }
 `)
