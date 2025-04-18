@@ -6,10 +6,12 @@ const Main = async ({ children }: {
 }) => {
   return (
     <main className="min-h-screen w-full bg-transparent relative flex flex-col items-center justify-center antialiased">
-      <div className="w-full h-screen fixed top-0">
+      <div className="w-full h-screen fixed top-0 -z-10">
         <BackgroundBeams />
       </div>
-      {children}
+      <div className="relative z-10 w-full">
+        {children}
+      </div>
     </main>
 
   );

@@ -152,6 +152,14 @@ const FeaturedEvents = ({ homepageContent }: {
                 </div>
               </Card>
             )}
+            
+            {events.featuredEvents && events.featuredEvents.filter((event: Event) => event.eventType === "networking").length > 0 && (
+              <div className="text-center pt-6">
+                <Button variant="outline" className="inline-flex items-center gap-1" asChild>
+                  <Link href="/events">View All Events <ChevronRight className="h-4 w-4" /></Link>
+                </Button>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
