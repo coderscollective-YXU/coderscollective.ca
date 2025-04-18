@@ -46,9 +46,6 @@ export default async function Home() {
           {homepageContent.events && (
             <FeaturedEvents homepageContent={homepageContent} />
           )}
-          {/* {homepageContent.mission && (
-            <Mission homepageContent={homepageContent} />
-          )} */}
 
           {homepageContent.about && <About homepageContent={homepageContent} />}
 

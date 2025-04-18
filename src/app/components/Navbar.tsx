@@ -9,11 +9,11 @@ import { usePathname } from "next/navigation";
 const navSections = [
   {
     label: "Upcoming Events",
-    href: "/events",
+    href: "/#upcoming-events",
   },
   {
-    label: "Programs",
-    href: "/programs",
+    label: "Workshops",
+    href: "/#workshops",
   },
   {
     label: "Resources",
@@ -22,10 +22,6 @@ const navSections = [
   {
     label: "About",
     href: "/about",
-  },
-  {
-    label: "Join",  
-    href: "/join",
   },
 ];
 
@@ -53,7 +49,8 @@ const navSections = [
   }, []);
   
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    const sectionId = id.replace('#', '');
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       closeMenu();
@@ -121,14 +118,14 @@ const DesktopMenu = ({
             </Link>
           ) : isHomePage ? (
             <button
-              onClick={() => scrollToSection(section.href.substring(1))}
+              onClick={() => scrollToSection(section.href.replace('/', ''))}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
               {section.label}
             </button>
           ) : (
             <Link
-              href={`/#${section.href.substring(1)}`}
+              href={section.href}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
               {section.label}
@@ -189,14 +186,14 @@ const MobileMenu = ({
               </Link>
             ) : isHomePage ? (
               <button
-                onClick={() => scrollToSection(section.href.substring(1))}
+                onClick={() => scrollToSection(section.href.replace('/', ''))}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
                 {section.label}
               </button>
             ) : (
               <Link
-                href={`/#${section.href.substring(1)}`}
+                href={section.href}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
                 {section.label}
