@@ -75,7 +75,7 @@ const Programs = ({ homepageContent }: {
                 </p>
                 <Button
                   onClick={() => {
-                    const eventsSection = document.getElementById('events');
+                    const eventsSection = document.getElementById('upcoming-events');
                     if (eventsSection) {
                       eventsSection.scrollIntoView({ behavior: 'smooth' });
                     }

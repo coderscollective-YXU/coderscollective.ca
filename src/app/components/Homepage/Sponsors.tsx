@@ -10,7 +10,7 @@ const Sponsors = () => {
         <p className="text-lg mb-6 text-neutral-300">
           Be a part of something impactful in London, Ontario&apos;s tech community. Your logo can be here! Contact us below to explore sponsorship.
         </p>
-        <Link href="/contact" className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium">
+        <Link href="/signup" className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium">
           Contact us <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </div>

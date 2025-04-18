@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import { HOMEPAGE_QUERYResult } from "../../../../sanity.types";
 import Link from "next/link";
+import { MagicStars } from "@/components/ui/magic-stars";
 
 const Hero = ({ homepageContent }: {
   homepageContent: HOMEPAGE_QUERYResult
@@ -28,7 +29,19 @@ const Hero = ({ homepageContent }: {
                   key={index}
                   className={wordObj.isStyled ? "gradient-text" : ""}
                 >
-                  {wordObj.text}
+                  {wordObj.text === "AI" ? (
+                    <span className={`relative inline-block px-1 ${wordObj.isStyled ? "gradient-text" : ""}`}>
+                      <MagicStars 
+                        containerWidth={140} 
+                        containerHeight={80} 
+                        numberOfStars={8} 
+                        className="absolute -top-6 -left-4 -right-4"
+                      />
+                      {wordObj.text}
+                    </span>
+                  ) : (
+                    wordObj.text
+                  )}
                   {insertBreak ? <br /> : index < splitAndStyleCodeAndAi(homepageContent.hero?.title ?? "")?.length - 1 && ' '}
                 </span>
               );

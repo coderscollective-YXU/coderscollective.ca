@@ -16,7 +16,7 @@ export default function SignupPage() {
           <Card>
             <CardHeader>
               <div className='flex justify-center m-3'>
-                <MagicIcon />
+                <MagicIcon variant='gradient' />
               </div>
               <CardTitle className='text-2xl font-bold text-center'>
                 Join Coders Collective

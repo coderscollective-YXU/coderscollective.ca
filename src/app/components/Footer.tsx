@@ -49,8 +49,8 @@ const informationLinks = [
     href: "/privacy-policy",
   },
   {
-    label: "Contact",
-    href: "/about#contact",
+    label: "Contact Us",
+    href: "mailto:info@coderscollective.ca",
   },
 ];
 
