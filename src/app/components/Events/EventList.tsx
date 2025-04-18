@@ -13,14 +13,12 @@ interface EventListProps {
   events: Event[];
   showViewAll?: boolean;
   viewAllHref?: string;
-  buttonText?: string;
 }
 
 export const EventList = ({ 
   events, 
   showViewAll = false, 
   viewAllHref = "/events", 
-  buttonText 
 }: EventListProps) => {
   const [activeTab, setActiveTab] = useState("workshop");
   
@@ -50,7 +48,7 @@ export const EventList = ({
         {workshopEvents.length > 0 ? (
           <>
             {workshopEvents.map((event, index) => (
-              <EventCard key={index} event={event} buttonText={buttonText} />
+              <EventCard key={index} event={event} />
             ))}
 
             {showViewAll && workshopEvents.length > 0 && (
@@ -76,7 +74,7 @@ export const EventList = ({
         {networkingEvents.length > 0 ? (
           <>
             {networkingEvents.map((event, index) => (
-              <EventCard key={index} event={event} buttonText={buttonText} />
+              <EventCard key={index} event={event} />
             ))}
             
             {showViewAll && networkingEvents.length > 0 && (

@@ -7,12 +7,16 @@ import { formatDate } from "@/lib/utils";
 interface EventCardProps {
   event: Event;
   showButton?: boolean;
-  buttonText?: string;
 }
 
-export const EventCard = ({ event, showButton = true, buttonText }: EventCardProps) => {
+export const EventCard = ({ event, showButton = true }: EventCardProps) => {
   const isWorkshop = event.eventType === "workshop";
-  const buttonDefaultText = isWorkshop ? "Register Now" : "Apply for Series";
+  
+  let buttonDefaultText = isWorkshop ? "Register Now" : "Apply for Series";
+  
+  if (!event.isLaunched) {
+    buttonDefaultText = "Waitlist";
+  }
 
   return (
     <Card className="overflow-hidden bg-card hover:border-primary/50 transition-colors">
@@ -22,7 +26,7 @@ export const EventCard = ({ event, showButton = true, buttonText }: EventCardPro
             ${isWorkshop ? "bg-blue-500/10" : "bg-primary/10"}`}>
             <div className={`text-sm font-semibold mb-1 
               ${isWorkshop ? "text-blue-400" : "text-primary"}`}>
-              {event.eventType}
+              {event.eventType === "workshop" ? "Workshop" : "Networking"}
             </div>
             <Calendar className={`h-8 w-8 mb-2 
               ${isWorkshop ? "text-blue-400" : "text-primary"}`} />
@@ -40,7 +44,7 @@ export const EventCard = ({ event, showButton = true, buttonText }: EventCardPro
                 <MapPin className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">{event.location}</span>
               </div>
-              {isWorkshop && (
+              {isWorkshop && event.isLaunched&& (
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm text-muted-foreground">{event.spotsAvailable} spots available</span>
@@ -49,13 +53,17 @@ export const EventCard = ({ event, showButton = true, buttonText }: EventCardPro
             </div>
 
             {showButton && (
-              <Button className="mt-2 bg-primary hover:bg-primary/90 w-full md:w-auto" asChild={!!event.link}>
-                {event.link ? (
+              <Button className="mt-2 bg-primary hover:bg-primary/90 w-full md:w-auto" asChild={!!event.link && event.isLaunched}>
+                {event.isLaunched && event.link ? (
                   <a href={event.link} target="_blank" rel="noopener noreferrer">
-                    {buttonText || buttonDefaultText}
+                    {buttonDefaultText}
+                  </a>
+                ) : !event.isLaunched ? (
+                  <a href="/signup">
+                    {buttonDefaultText}
                   </a>
                 ) : (
-                  buttonText || buttonDefaultText
+                  buttonDefaultText
                 )}
               </Button>
             )}

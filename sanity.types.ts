@@ -184,6 +184,10 @@ export type NewletterSignup = {
   _updatedAt: string;
   _rev: string;
   email?: string;
+  isMember?: boolean;
+  isVolunteer?: boolean;
+  isSponsor?: boolean;
+  privacyConsent?: boolean;
 };
 
 export type Event = {
@@ -198,6 +202,7 @@ export type Event = {
   link: string;
   spotsAvailable: number;
   location: string;
+  isLaunched: boolean;
   eventType: "networking" | "workshop";
 };
 
@@ -475,6 +480,25 @@ export type ABOUT_PAGE_QUERYResult = {
   } | null;
 } | null;
 
+// Source: ./src/sanity/queries/events.ts
+// Variable: ALL_EVENTS_QUERY
+// Query: *[_type == "event"] | order(date desc) {    ...  }
+export type ALL_EVENTS_QUERYResult = Array<{
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  date: string;
+  hours: string;
+  link: string;
+  spotsAvailable: number;
+  location: string;
+  isLaunched: boolean;
+  eventType: "networking" | "workshop";
+}>;
+
 // Source: ./src/sanity/queries/existingSubscriber.ts
 // Variable: EXISTING_SUBSCRIBER_QUERY
 // Query: *[_type == "newletterSignup" && email == $email] {      _id,      email    }
@@ -577,6 +601,7 @@ export type HOMEPAGE_QUERYResult = {
       link: string;
       spotsAvailable: number;
       location: string;
+      isLaunched: boolean;
       eventType: "networking" | "workshop";
     }> | null;
   } | null;
@@ -632,6 +657,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"aboutPage\"] [0] {\n    ...,\n    ourTeam {\n      title,\n      members[] -> {\n        ...,\n      }\n    },\n    vision  {\n      title,\n      description\n    }\n  }\n": ABOUT_PAGE_QUERYResult;
+    "\n  *[_type == \"event\"] | order(date desc) {\n    ...\n  }\n": ALL_EVENTS_QUERYResult;
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
     "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle,\n      \"featuredEvents\": featuredEvents  [] -> {\n        ...\n      }\n    } \n  }\n": HOMEPAGE_QUERYResult;
     "\n  *[_type == \"siteSettings\"] [0] {\n    socialLinks,\n    footer\n  }\n  ": FOOTER_QUERYResult;

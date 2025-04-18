@@ -24,7 +24,6 @@ export default async function EventsPage() {
           <EventList 
             events={allEvents || []} 
             showViewAll={false}
-            buttonText="Register Now"
           />
         </div>
       </section>

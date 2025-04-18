@@ -1077,6 +1077,34 @@
           "type": "string"
         },
         "optional": true
+      },
+      "isMember": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
+      "isVolunteer": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
+      "isSponsor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
+      "privacyConsent": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },
@@ -1154,6 +1182,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": false
+      },
+      "isLaunched": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": false
       },
