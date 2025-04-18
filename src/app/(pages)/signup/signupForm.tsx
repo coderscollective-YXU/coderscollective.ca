@@ -19,7 +19,7 @@ const SignupForm = () => {
   useEffect(() => {
     if (formState.success) {
       const timeout = setTimeout(() => {
-        router.push("/success");
+        router.push("/");
       }, 4000);
 
       return () => {
