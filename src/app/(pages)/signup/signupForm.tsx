@@ -33,43 +33,59 @@ const SignupForm = () => {
       <div className='space-y-2'>
         <div className='space-y-3'>
           <Label>I&apos;m interested in:</Label>
-          <div className='flex items-center space-x-2'>
-            <Checkbox id='isMember' name='isMember' disabled={isPending} />
-            <Label htmlFor='isMember' className='text-sm'>
-              Member (Newsletter updates)
-            </Label>
-          </div>
+          <div className='space-y-2'>
+            <div>
+              <div className='flex items-center space-x-2'>
+                <Checkbox id='isMember' name='isMember' disabled={isPending} />
+                <Label htmlFor='isMember' className='text-sm'>
+                  Member
+                </Label>
+              </div>
+              <p className='sm:text-sm text-muted-foreground mt-1 ml-6 text-xs'>
+                Be the first to know when we launch new events and resources.
+              </p>
+            </div>
 
-          <div className='flex items-center space-x-2'>
-            <Checkbox
-              id='isVolunteer'
-              name='isVolunteer'
-              disabled={isPending}
-            />
-            <Label htmlFor='isVolunteer' className='text-sm'>
-              Volunteer (Teach or Mentor)
-            </Label>
-          </div>
+            <div>
+              <div className='flex items-center space-x-2'>
+                <Checkbox
+                  id='isVolunteer'
+                  name='isVolunteer'
+                  disabled={isPending}
+                />
+                <Label htmlFor='isVolunteer' className='text-sm'>
+                  Volunteer
+                </Label>
+              </div>
+              <p className='sm:text-sm text-muted-foreground mt-1 ml-6 text-xs'>
+                Teach or mentor a workshop or event.
+              </p>
+            </div>
 
-          <div className='flex items-center space-x-2'>
-            <Checkbox id='isSponsor' name='isSponsor' disabled={isPending} />
-            <Label htmlFor='isSponsor' className='text-sm'>
-              Sponsorship opportunities
-            </Label>
+            <div>
+              <div className='flex items-center space-x-2'>
+                <Checkbox id='isSponsor' name='isSponsor' disabled={isPending} />
+                <Label htmlFor='isSponsor' className='text-sm'>
+                 Venue Sponsor
+                </Label>
+              </div>
+              <p className='sm:text-sm text-muted-foreground mt-1 ml-6 text-xs'>
+                Help us cover the costs of our venue for our events.
+              </p>
+            </div>
           </div>
         </div>
         <div className='space-y-2'>
-        <Label htmlFor='email'>Email address</Label>
-        <Input
-          id='email'
-          type='email'
-          name='email'
-          placeholder='your@email.com'
-          required
-          disabled={isPending}
-        />
+          <Label htmlFor='email'>Email address</Label>
+          <Input
+            id='email'
+            type='email'
+            name='email'
+            placeholder='your@email.com'
+            required
+            disabled={isPending}
+          />
         </div>
-        
       </div>
       <div className='space-y-2'>
         <div className='flex items-center space-x-2'>

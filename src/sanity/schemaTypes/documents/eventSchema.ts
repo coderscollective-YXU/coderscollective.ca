@@ -45,6 +45,14 @@ export const eventSchema = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: "isLaunched",
+      title: "Launched",
+      description: "If the event is launched on eventbrite, this will be true",
+      type: "boolean",
+      validation: (R) => R.required(),
+      initialValue: false,
+    }),
+    defineField({
       name: "eventType",
       title: "Event Type",
       type: "string",

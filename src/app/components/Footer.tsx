@@ -1,4 +1,3 @@
-import { FOOTER_QUERYResult } from "../../../sanity.types";
 import Logo from "@/components/ui/logo";
 import Link from "next/link";
 import EmailIcon from "./icons/EmailIcon";
@@ -8,6 +7,7 @@ import InstaIcon from "./icons/InstaIcon";
 import LinkIcon from "./icons/LinkIcon";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import TwitterIcon from "./icons/TwitterIcon";
+import { FOOTER_QUERYResult } from "../../../sanity.types";
 
 const SocialIcons = {
   "email": <EmailIcon />,
@@ -18,6 +18,41 @@ const SocialIcons = {
   "linkedin": <LinkedInIcon />,
   "twitter": <TwitterIcon />,
 };
+
+// Reusable link objects for easy maintenance
+const communityLinks = [
+  {
+    label: "Events",
+    href: "/#events",
+  },
+  {
+    label: "Get Involved",
+    href: "/#get-involved",
+  },
+  {
+    label: "Join Us",
+    href: "/signup",
+  },
+];
+
+const informationLinks = [
+  {
+    label: "About Us",
+    href: "/about",
+  },
+  {
+    label: "Code of Conduct",
+    href: "/code-of-conduct",
+  },
+  {
+    label: "Privacy Policy",
+    href: "/privacy-policy",
+  },
+  {
+    label: "Contact Us",
+    href: "mailto:info@coderscollective.ca",
+  },
+];
 
 const Footer = ({ content }: {
   content: FOOTER_QUERYResult;
@@ -37,7 +72,7 @@ const Footer = ({ content }: {
               <ul className="flex space-x-4">
                 {content.socialLinks.map(link => (
                   <li key={link.title}>
-                    <Link href={link.linkType === "email" ? `mailto:${link.url}` : link.url}>
+                    <Link href={link.linkType === "email" ? `mailto:${link.url}` : link.url} target="_blank">
                       {SocialIcons[link.linkType]}
                     </Link>
                   </li>
@@ -45,36 +80,34 @@ const Footer = ({ content }: {
               </ul>
             )}
           </div>
-          {footer.resources && footer.resources.length > 0 && (
-            <div className="md:col-span-2">
-              <h3 className="font-bold text-lg mb-4">Resources</h3>
-              <ul className="space-y-3">
-                {footer.resources.map(resource => (
-                  <li key={resource._key}>
-                    <Link href={resource.url} className="text-muted-foreground hover:text-primary transition-colors">
-                      {resource.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div className="md:col-span-2">
+            <h3 className="font-bold text-lg mb-4">Information</h3>
+            <ul className="space-y-3">
+              {informationLinks.map(link => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {footer.company && footer.company.length > 0 && (
-            <div className="md:col-span-2">
-              <h3 className="font-bold text-lg mb-4">Company</h3>
-              <ul className="space-y-3">
-                {footer.company.map(link => (
-                  <li key={link._key}>
-                    <Link href={link.url} className="text-muted-foreground hover:text-primary transition-colors">
-                      {link.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
+          <div className="md:col-span-2">
+            <h3 className="font-bold text-lg mb-4">Community</h3>
+            <ul className="space-y-3">
+              {communityLinks.map(link => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+  
           <div className="md:col-span-3">
             <h3 className="font-bold text-lg mb-4">{footer.subscribe.title}</h3>
             <p className="text-muted-foreground mb-4">

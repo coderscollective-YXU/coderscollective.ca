@@ -5,7 +5,7 @@ import React from "react";
 const Logo = () => {
   return (
     <Link href={"/"} className='text-xl text-neutral-50 flex gap-2 items-center'>
-      <MagicIcon variant='dark' />
+      <MagicIcon variant='gradient' />
       <div className=''>
         <div>Coders</div>
         <div style={{ marginTop: '-10px' }}>Collective</div>
