@@ -4,6 +4,7 @@ import Logo from "@/components/ui/logo";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navSections = [
   {
@@ -31,6 +32,8 @@ const navSections = [
   const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -48,6 +51,7 @@ const navSections = [
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -67,7 +71,11 @@ const navSections = [
       <div className="container mx-auto px-4 py-4 flex justify-between items-center ">
         <Logo />
 
-        <DesktopMenu scrollToSection={scrollToSection} sections={navSections} />
+        <DesktopMenu 
+          scrollToSection={scrollToSection} 
+          sections={navSections} 
+          isHomePage={isHomePage} 
+        />
         <button className="md:hidden text-foreground" onClick={toggleMenu}>
           {isMenuOpen ? <X /> : <Menu />}
         </button>
@@ -75,6 +83,7 @@ const navSections = [
           isMenuOpen={isMenuOpen}
           scrollToSection={scrollToSection}
           sections={navSections}
+          isHomePage={isHomePage}
         />
       </div>
     </nav>
@@ -86,17 +95,19 @@ export default Navbar;
 const DesktopMenu = ({
   scrollToSection,
   sections,
+  isHomePage,
 }: {
   scrollToSection: (id: string) => void;
   sections: { label: string; href: string }[];
+  isHomePage: boolean;
 }) => {
   return (
     <div className="hidden md:flex items-center space-x-8">
       {sections.map((section) => (
         <div key={section.label}>
-          {["about", "resources"].includes(section.label) ? (
+          {["About", "Resources"].includes(section.label) ? (
             <Link
-              href={`/${section.href}`}
+              href={section.href}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
               {section.label}
@@ -108,23 +119,38 @@ const DesktopMenu = ({
             >
               Join Us
             </Link>
-          ) : (
+          ) : isHomePage ? (
             <button
-              onClick={() => scrollToSection(section.href)}
+              onClick={() => scrollToSection(section.href.substring(1))}
               className="text-sm capitalize font-medium hover:text-primary transition-colors"
             >
               {section.label}
             </button>
+          ) : (
+            <Link
+              href={`/#${section.href.substring(1)}`}
+              className="text-sm capitalize font-medium hover:text-primary transition-colors"
+            >
+              {section.label}
+            </Link>
           )}
         </div>
       ))}
 
-      <Button
-        onClick={() => scrollToSection("get-involved")}
-        className="bg-primary hover:bg-primary/90"
-      >
-        Get Involved
-      </Button>
+      {isHomePage ? (
+        <Button
+          onClick={() => scrollToSection("get-involved")}
+          className="bg-primary hover:bg-primary/90"
+        >
+          Get Involved
+        </Button>
+      ) : (
+        <Link href="/#get-involved">
+          <Button className="bg-primary hover:bg-primary/90">
+            Get Involved
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };
@@ -133,10 +159,12 @@ const MobileMenu = ({
   isMenuOpen,
   scrollToSection,
   sections,
+  isHomePage,
 }: {
   isMenuOpen: boolean;
   scrollToSection: (id: string) => void;
   sections: { label: string; href: string }[];
+  isHomePage: boolean;
 }) => {
   if (!isMenuOpen) return;
 
@@ -145,9 +173,9 @@ const MobileMenu = ({
       <div className="px-4 py-5 flex flex-col space-y-5">
         {sections.map((section) => (
           <div key={section.label}>
-            {["about", "resources"].includes(section.label) ? (
+            {["About", "Resources"].includes(section.label) ? (
               <Link
-                href={`/${section.href}`}
+                href={section.href}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
                 {section.label}
@@ -159,22 +187,38 @@ const MobileMenu = ({
               >
                 Join Us
               </Link>
-            ) : (
+            ) : isHomePage ? (
               <button
-                onClick={() => scrollToSection(section.href)}
+                onClick={() => scrollToSection(section.href.substring(1))}
                 className="text-sm capitalize font-medium hover:text-primary transition-colors"
               >
                 {section.label}
               </button>
+            ) : (
+              <Link
+                href={`/#${section.href.substring(1)}`}
+                className="text-sm capitalize font-medium hover:text-primary transition-colors"
+              >
+                {section.label}
+              </Link>
             )}
           </div>
         ))}
-        <Button
-          onClick={() => scrollToSection("get-involved")}
-          className="bg-primary hover:bg-primary/90"
-        >
-          Get Involved
-        </Button>
+        
+        {isHomePage ? (
+          <Button
+            onClick={() => scrollToSection("get-involved")}
+            className="bg-primary hover:bg-primary/90"
+          >
+            Get Involved
+          </Button>
+        ) : (
+          <Link href="/#get-involved">
+            <Button className="bg-primary hover:bg-primary/90">
+              Get Involved
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
