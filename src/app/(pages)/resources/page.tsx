@@ -35,7 +35,7 @@ export default function ResourcesPage() {
         <div className="mt-12 text-center">
           <p className="mb-4">Want to contribute to our resources?</p>
           <Button asChild>
-            <Link href="/get-involved">Get Involved</Link>
+            <Link href="/signup">Get Involved</Link>
           </Button>
         </div>
       </div>

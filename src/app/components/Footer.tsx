@@ -72,7 +72,7 @@ const Footer = ({ content }: {
               <ul className="flex space-x-4">
                 {content.socialLinks.map(link => (
                   <li key={link.title}>
-                    <Link href={link.linkType === "email" ? `mailto:${link.url}` : link.url}>
+                    <Link href={link.linkType === "email" ? `mailto:${link.url}` : link.url} target="_blank">
                       {SocialIcons[link.linkType]}
                     </Link>
                   </li>
@@ -80,20 +80,6 @@ const Footer = ({ content }: {
               </ul>
             )}
           </div>
-          
-          <div className="md:col-span-2">
-            <h3 className="font-bold text-lg mb-4">Community</h3>
-            <ul className="space-y-3">
-              {communityLinks.map(link => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           <div className="md:col-span-2">
             <h3 className="font-bold text-lg mb-4">Information</h3>
             <ul className="space-y-3">
@@ -107,6 +93,21 @@ const Footer = ({ content }: {
             </ul>
           </div>
 
+
+          <div className="md:col-span-2">
+            <h3 className="font-bold text-lg mb-4">Community</h3>
+            <ul className="space-y-3">
+              {communityLinks.map(link => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+  
           <div className="md:col-span-3">
             <h3 className="font-bold text-lg mb-4">{footer.subscribe.title}</h3>
             <p className="text-muted-foreground mb-4">
