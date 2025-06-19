@@ -6,10 +6,7 @@ const HOMEPAGE_QUERY = defineQuery(`
     ...,
     "events": events {
       title,
-      subtitle,
-      "featuredEvents": featuredEvents  [] -> {
-        ...
-      }
+      subtitle
     } 
   }
 `)
