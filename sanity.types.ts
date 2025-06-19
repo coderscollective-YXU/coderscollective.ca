@@ -396,6 +396,13 @@ export type SiteSettings = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | TeamMember | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | NewletterSignup | Event | AboutPage | Homepage | LinkObject | SiteSettings;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/app/api/newsletter-subscribers/route.ts
+// Variable: NEWSLETTER_SUBSCRIBERS_QUERY
+// Query: *[_type == "newletterSignup"] {    email  }
+export type NEWSLETTER_SUBSCRIBERS_QUERYResult = Array<{
+  email: string | null;
+}>;
+
 // Source: ./src/sanity/queries/aboutPage.ts
 // Variable: ABOUT_PAGE_QUERY
 // Query: *[_type == "aboutPage"] [0] {    ...,    ourTeam {      title,      members[] -> {        ...,      }    },    vision  {      title,      description    }  }
@@ -482,8 +489,25 @@ export type ABOUT_PAGE_QUERYResult = {
 
 // Source: ./src/sanity/queries/events.ts
 // Variable: ALL_EVENTS_QUERY
-// Query: *[_type == "event"] | order(date desc) {    ...  }
+// Query: *[_type == "event" && date >= now()] | order(date asc) {    ...  }
 export type ALL_EVENTS_QUERYResult = Array<{
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  date: string;
+  hours: string;
+  link: string;
+  spotsAvailable: number;
+  location: string;
+  isLaunched: boolean;
+  eventType: "networking" | "workshop";
+}>;
+// Variable: UPCOMING_EVENTS_QUERY
+// Query: *[_type == "event" && date >= now()] | order(date asc) [0...3] {    ...  }
+export type UPCOMING_EVENTS_QUERYResult = Array<{
   _id: string;
   _type: "event";
   _createdAt: string;
@@ -509,7 +533,7 @@ export type EXISTING_SUBSCRIBER_QUERYResult = Array<{
 
 // Source: ./src/sanity/queries/homepage.ts
 // Variable: HOMEPAGE_QUERY
-// Query: *[_type == "homepage"] [0] {    ...,    "events": events {      title,      subtitle,      "featuredEvents": featuredEvents  [] -> {        ...      }    }   }
+// Query: *[_type == "homepage"] [0] {    ...,    "events": events {      title,      subtitle    }   }
 export type HOMEPAGE_QUERYResult = {
   _id: string;
   _type: "homepage";
@@ -589,21 +613,6 @@ export type HOMEPAGE_QUERYResult = {
   events: {
     title: string;
     subtitle: string;
-    featuredEvents: Array<{
-      _id: string;
-      _type: "event";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      name: string;
-      date: string;
-      hours: string;
-      link: string;
-      spotsAvailable: number;
-      location: string;
-      isLaunched: boolean;
-      eventType: "networking" | "workshop";
-    }> | null;
   } | null;
   getInvolved?: {
     title: string;
@@ -656,10 +665,12 @@ export type FOOTER_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "\n  *[_type == \"newletterSignup\"] {\n    email\n  }\n": NEWSLETTER_SUBSCRIBERS_QUERYResult;
     "\n  *[_type == \"aboutPage\"] [0] {\n    ...,\n    ourTeam {\n      title,\n      members[] -> {\n        ...,\n      }\n    },\n    vision  {\n      title,\n      description\n    }\n  }\n": ABOUT_PAGE_QUERYResult;
-    "\n  *[_type == \"event\"] | order(date desc) {\n    ...\n  }\n": ALL_EVENTS_QUERYResult;
+    "\n  *[_type == \"event\" && date >= now()] | order(date asc) {\n    ...\n  }\n": ALL_EVENTS_QUERYResult;
+    "\n  *[_type == \"event\" && date >= now()] | order(date asc) [0...3] {\n    ...\n  }\n": UPCOMING_EVENTS_QUERYResult;
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
-    "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle,\n      \"featuredEvents\": featuredEvents  [] -> {\n        ...\n      }\n    } \n  }\n": HOMEPAGE_QUERYResult;
+    "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle\n    } \n  }\n": HOMEPAGE_QUERYResult;
     "\n  *[_type == \"siteSettings\"] [0] {\n    socialLinks,\n    footer\n  }\n  ": FOOTER_QUERYResult;
   }
 }

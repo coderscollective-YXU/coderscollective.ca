@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
 import { getHomepageContent } from "@/sanity/queries/homepage";
+import { getUpcomingEvents } from "@/sanity/queries/events";
 import React from "react";
 import Main from "../components/Main";
 import Link from "next/link";
@@ -13,6 +14,8 @@ import Sponsors from "../components/Homepage/Sponsors";
 
 export default async function Home() {
   const homepageContent = await getHomepageContent();
+  const upcomingEvents = await getUpcomingEvents();
+  
   return (
     <Main>
       {!homepageContent ? (
@@ -44,7 +47,11 @@ export default async function Home() {
         <div className='relative z-10 flex flex-col sm:px-16 px-4'>
           {homepageContent.hero && <Hero homepageContent={homepageContent} />}
           {homepageContent.events && (
-            <FeaturedEvents homepageContent={homepageContent} />
+            <FeaturedEvents 
+              events={upcomingEvents || []}
+              title={homepageContent.events.title}
+              subtitle={homepageContent.events.subtitle}
+            />
           )}
 
           {homepageContent.about && <About homepageContent={homepageContent} />}

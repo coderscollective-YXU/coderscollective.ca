@@ -95,17 +95,6 @@ export const homepageSchema = defineType({
           title: "Subtitle",
           type: "string",
           validation: (R) => R.required(),
-        }),
-        defineField({
-          name: "featuredEvents",
-          title: "Featured Events",
-          type: "array",
-          of: [
-            {
-              type: "reference",
-              to: [{type: "event"}]
-            }
-          ]
         })
       ],
     }),
