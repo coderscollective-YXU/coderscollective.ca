@@ -30,7 +30,6 @@ export const eventSchema = defineType({
       name: "link",
       title: "Event Link",
       type: "url",
-      validation: (R) => R.required(),
     }),
     defineField({
       name: "spotsAvailable",
