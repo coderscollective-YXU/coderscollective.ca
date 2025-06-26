@@ -13,65 +13,21 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
+export type Testimonial = {
   _id: string;
-  _type: "sanity.fileAsset";
+  _type: "testimonial";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
+  firstName: string;
+  lastName?: string;
+  quote: string;
+  workshopType?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "workshopType";
+  };
 };
 
 export type TeamMember = {
@@ -120,63 +76,6 @@ export type TeamMember = {
   }>;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type NewletterSignup = {
   _id: string;
   _type: "newletterSignup";
@@ -199,11 +98,26 @@ export type Event = {
   name: string;
   date: string;
   hours: string;
-  link: string;
+  link?: string;
   spotsAvailable: number;
   location: string;
   isLaunched: boolean;
   eventType: "networking" | "workshop";
+  workshopType?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "workshopType";
+  };
+};
+
+export type WorkshopType = {
+  _id: string;
+  _type: "workshopType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
 };
 
 export type AboutPage = {
@@ -328,12 +242,16 @@ export type Homepage = {
   events?: {
     title: string;
     subtitle: string;
-    featuredEvents?: Array<{
+  };
+  testimonials?: {
+    title: string;
+    subtitle: string;
+    featuredTestimonials?: Array<{
       _ref: string;
       _type: "reference";
       _weak?: boolean;
       _key: string;
-      [internalGroqTypeReferenceTo]?: "event";
+      [internalGroqTypeReferenceTo]?: "testimonial";
     }>;
   };
   getInvolved?: {
@@ -394,15 +312,126 @@ export type SiteSettings = {
   };
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | TeamMember | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | NewletterSignup | Event | AboutPage | Homepage | LinkObject | SiteSettings;
-export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/app/api/newsletter-subscribers/route.ts
-// Variable: NEWSLETTER_SUBSCRIBERS_QUERY
-// Query: *[_type == "newletterSignup"] {    email  }
-export type NEWSLETTER_SUBSCRIBERS_QUERYResult = Array<{
-  email: string | null;
-}>;
+export type SanityImagePaletteSwatch = {
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
 
+export type SanityImagePalette = {
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type AllSanitySchemaTypes = Testimonial | TeamMember | NewletterSignup | Event | WorkshopType | AboutPage | Homepage | LinkObject | SiteSettings | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries/aboutPage.ts
 // Variable: ABOUT_PAGE_QUERY
 // Query: *[_type == "aboutPage"] [0] {    ...,    ourTeam {      title,      members[] -> {        ...,      }    },    vision  {      title,      description    }  }
@@ -499,11 +528,17 @@ export type ALL_EVENTS_QUERYResult = Array<{
   name: string;
   date: string;
   hours: string;
-  link: string;
+  link?: string;
   spotsAvailable: number;
   location: string;
   isLaunched: boolean;
   eventType: "networking" | "workshop";
+  workshopType?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "workshopType";
+  };
 }>;
 // Variable: UPCOMING_EVENTS_QUERY
 // Query: *[_type == "event" && date >= now()] | order(date asc) [0...3] {    ...  }
@@ -516,11 +551,17 @@ export type UPCOMING_EVENTS_QUERYResult = Array<{
   name: string;
   date: string;
   hours: string;
-  link: string;
+  link?: string;
   spotsAvailable: number;
   location: string;
   isLaunched: boolean;
   eventType: "networking" | "workshop";
+  workshopType?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "workshopType";
+  };
 }>;
 
 // Source: ./src/sanity/queries/existingSubscriber.ts
@@ -533,7 +574,7 @@ export type EXISTING_SUBSCRIBER_QUERYResult = Array<{
 
 // Source: ./src/sanity/queries/homepage.ts
 // Variable: HOMEPAGE_QUERY
-// Query: *[_type == "homepage"] [0] {    ...,    "events": events {      title,      subtitle    }   }
+// Query: *[_type == "homepage"] [0] {    ...,    "events": events {      title,      subtitle    },    "testimonials": testimonials {      title,      subtitle,      "featuredTestimonials": featuredTestimonials [] -> {        firstName,        lastName,        quote      }    }  }
 export type HOMEPAGE_QUERYResult = {
   _id: string;
   _type: "homepage";
@@ -614,6 +655,15 @@ export type HOMEPAGE_QUERYResult = {
     title: string;
     subtitle: string;
   } | null;
+  testimonials: {
+    title: string;
+    subtitle: string;
+    featuredTestimonials: Array<{
+      firstName: string;
+      lastName: string | null;
+      quote: string;
+    }> | null;
+  } | null;
   getInvolved?: {
     title: string;
     subtitle: string;
@@ -665,12 +715,11 @@ export type FOOTER_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"newletterSignup\"] {\n    email\n  }\n": NEWSLETTER_SUBSCRIBERS_QUERYResult;
     "\n  *[_type == \"aboutPage\"] [0] {\n    ...,\n    ourTeam {\n      title,\n      members[] -> {\n        ...,\n      }\n    },\n    vision  {\n      title,\n      description\n    }\n  }\n": ABOUT_PAGE_QUERYResult;
     "\n  *[_type == \"event\" && date >= now()] | order(date asc) {\n    ...\n  }\n": ALL_EVENTS_QUERYResult;
     "\n  *[_type == \"event\" && date >= now()] | order(date asc) [0...3] {\n    ...\n  }\n": UPCOMING_EVENTS_QUERYResult;
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
-    "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle\n    } \n  }\n": HOMEPAGE_QUERYResult;
+    "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle\n    },\n    \"testimonials\": testimonials {\n      title,\n      subtitle,\n      \"featuredTestimonials\": featuredTestimonials [] -> {\n        firstName,\n        lastName,\n        quote\n      }\n    }\n  }\n": HOMEPAGE_QUERYResult;
     "\n  *[_type == \"siteSettings\"] [0] {\n    socialLinks,\n    footer\n  }\n  ": FOOTER_QUERYResult;
   }
 }

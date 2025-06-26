@@ -11,6 +11,7 @@ import Programs from "../components/Homepage/Programs";
 import FeaturedEvents from "../components/Homepage/FeaturedEvents";
 import GetInvolved from "../components/Homepage/GetInvolved";
 import Sponsors from "../components/Homepage/Sponsors";
+import Testimonials from "../components/Homepage/Testimonials";
 
 export const metadata = {
   title: "Coders Collective",
@@ -67,6 +68,9 @@ export default async function Home() {
             <Programs homepageContent={homepageContent} />
           )}
 
+          {homepageContent.testimonials && (
+            <Testimonials testimonials={homepageContent.testimonials} />
+          )}
           {homepageContent.getInvolved && (
             <GetInvolved homepageContent={homepageContent} />
           )}

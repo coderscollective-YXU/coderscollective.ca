@@ -1,5 +1,5 @@
 import HomeIcon from "@/app/components/icons/HomeIcon";
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 import { missionSchema } from "./mission";
 import { aboutSchema } from "./about";
 import { programsSchema } from "./programs";
@@ -22,6 +22,9 @@ export const homepageSchema = defineType({
     },
     {
       name: "events",
+    },
+    {
+      name: "testimonials",
     },
   ],
   fields: [
@@ -95,10 +98,43 @@ export const homepageSchema = defineType({
           title: "Subtitle",
           type: "string",
           validation: (R) => R.required(),
-        })
+        }),
       ],
     }),
-    getInvolvedSchema
+    defineField({
+      name: "testimonials",
+      title: "Testimonials Section",
+      type: "object",
+      group: ["testimonials"],
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+          validation: (R) => R.required(),
+        }),
+        defineField({
+          name: "subtitle",
+          title: "Subtitle",
+          type: "string",
+          validation: (R) => R.required(),
+        }),
+        defineField({
+          name: "featuredTestimonials",
+          title: "Featured Testimonials",
+          type: "array",
+          of: [
+            defineArrayMember({
+              name: "testimonial",
+              title: "Testimonial",
+              type: "reference",
+              to: [{ type: "testimonial" }],
+            }),
+          ],
+        }),
+      ],
+    }),
+    getInvolvedSchema,
   ],
   preview: {
     select: {
