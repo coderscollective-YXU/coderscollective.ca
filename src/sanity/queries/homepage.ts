@@ -7,15 +7,24 @@ const HOMEPAGE_QUERY = defineQuery(`
     "events": events {
       title,
       subtitle
-    } 
+    },
+    "testimonials": testimonials {
+      title,
+      subtitle,
+      "featuredTestimonials": featuredTestimonials [] -> {
+        firstName,
+        lastName,
+        quote
+      }
+    }
   }
-`)
+`);
 
 export const getHomepageContent = async () => {
   try {
-    const homepageContent = await client.fetch(HOMEPAGE_QUERY)
-    return homepageContent
+    const homepageContent = await client.fetch(HOMEPAGE_QUERY);
+    return homepageContent;
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : String(error))
+    throw new Error(error instanceof Error ? error.message : String(error));
   }
 };
