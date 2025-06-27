@@ -1,16 +1,17 @@
-import React from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import Main from '@/app/components/Main';
-import { getAboutPageContent } from '@/sanity/queries/aboutPage';
-import { TeamMember } from '../../../../sanity.types';
-import { urlFor } from '@/sanity/lib/image';
-import SanityContentBlock from '@/app/components/SanityContentBlock';
-import Link from 'next/link';
-import Image from 'next/image';
+import React from "react";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import Main from "@/app/components/Main";
+import { getAboutPageContent } from "@/sanity/queries/aboutPage";
+import { TeamMember } from "../../../../sanity.types";
+import { urlFor } from "@/sanity/lib/image";
+import SanityContentBlock from "@/app/components/SanityContentBlock";
+import Link from "next/link";
+import Image from "next/image";
+import { connection } from "next/server";
 
 type FounderCardProps = {
-  founder: TeamMember
-}
+  founder: TeamMember;
+};
 
 const FounderCard = ({ founder }: FounderCardProps) => {
   return (
@@ -19,7 +20,12 @@ const FounderCard = ({ founder }: FounderCardProps) => {
         <div className="relative md:w-[300px] h-48 md:h-full overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 z-10" />
           <Image
-            src={urlFor(founder.image).width(300).height(300).format('webp').quality(100).url()}
+            src={urlFor(founder.image)
+              .width(300)
+              .height(300)
+              .format("webp")
+              .quality(100)
+              .url()}
             alt={`${founder.name}`}
             className="w-full h-full object-cover"
             width={300}
@@ -39,13 +45,12 @@ const FounderCard = ({ founder }: FounderCardProps) => {
             {founder.links && founder.links.length > 0 && (
               <ul className="flex gap-3 pt-2">
                 {founder.links.map((link) => (
-                  <li
-                    key={link._key}
-                  >
-                    <Link
-                      href={link.link.url}
-                    >
-                      <div dangerouslySetInnerHTML={{ __html: link.icon }} className="h-6 w-6" />
+                  <li key={link._key}>
+                    <Link href={link.link.url}>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: link.icon }}
+                        className="h-6 w-6"
+                      />
                     </Link>
                   </li>
                 ))}
@@ -59,7 +64,7 @@ const FounderCard = ({ founder }: FounderCardProps) => {
 };
 
 const AboutPage = async () => {
-
+  await connection();
   const pageContent = await getAboutPageContent();
 
   if (!pageContent) {
@@ -76,7 +81,9 @@ const AboutPage = async () => {
           </div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">{pageContent.hero.title}</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                {pageContent.hero.title}
+              </h1>
               <p className="text-xl text-muted-foreground">
                 {pageContent.hero.subtitle}
               </p>
@@ -86,25 +93,26 @@ const AboutPage = async () => {
       )}
 
       {/* Founders Section */}
-      {pageContent.ourTeam && pageContent.ourTeam.members && pageContent.ourTeam.members.length > 0 && (
-        <section className="py-12 md:py-20">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center">{pageContent.ourTeam.title}</h2>
-            <div className="flex flex-col gap-8">
-              {pageContent.ourTeam.members.map((founder, index) => (
-                <FounderCard
-                  key={`${founder._id}-${index}`}
-                  founder={founder}
-                />
-              ))}
+      {pageContent.ourTeam &&
+        pageContent.ourTeam.members &&
+        pageContent.ourTeam.members.length > 0 && (
+          <section className="py-12 md:py-20">
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl font-bold mb-12 text-center">
+                {pageContent.ourTeam.title}
+              </h2>
+              <div className="flex flex-col gap-8">
+                {pageContent.ourTeam.members.map((founder, index) => (
+                  <FounderCard
+                    key={`${founder._id}-${index}`}
+                    founder={founder}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
-
-      
-    </Main >
-
+          </section>
+        )}
+    </Main>
   );
 };
 

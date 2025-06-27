@@ -12,6 +12,7 @@ import FeaturedEvents from "../components/Homepage/FeaturedEvents";
 import GetInvolved from "../components/Homepage/GetInvolved";
 import Sponsors from "../components/Homepage/Sponsors";
 import Testimonials from "../components/Homepage/Testimonials";
+import { connection } from "next/server";
 
 export const metadata = {
   title: "Coders Collective",
@@ -19,6 +20,7 @@ export const metadata = {
 };
 
 export default async function Home() {
+  await connection();
   const homepageContent = await getHomepageContent();
   const upcomingEvents = await getUpcomingEvents();
 

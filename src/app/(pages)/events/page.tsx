@@ -1,6 +1,7 @@
 import { getAllEvents } from "@/sanity/queries/events";
 import Main from "../../components/Main";
 import { EventList } from "@/app/components/Events/EventList";
+import { connection } from "next/server";
 
 export const metadata = {
   title: "Events | Coders Collective",
@@ -8,6 +9,7 @@ export const metadata = {
 };
 
 export default async function EventsPage() {
+  await connection();
   const allEvents = await getAllEvents();
 
   return (
@@ -20,12 +22,9 @@ export default async function EventsPage() {
               Join us for upcoming workshops and networking events
             </p>
           </div>
-          <EventList 
-            events={allEvents || []} 
-            showViewAll={false}
-          />
+          <EventList events={allEvents || []} showViewAll={false} />
         </div>
       </section>
     </Main>
   );
-} 
+}
