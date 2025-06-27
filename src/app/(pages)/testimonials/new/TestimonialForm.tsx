@@ -57,7 +57,6 @@ const TestimonialForm = ({
         setErrorMessage(formState.errors.message);
       }
     } else {
-      console.log("setting the error message as undefined");
       setErrorMessage(undefined);
     }
   }, [formState]);
