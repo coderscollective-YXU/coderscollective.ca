@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import TextArea from "@/components/ui/textarea";
 import { getAllWorkshopTypes } from "@/sanity/queries/workshopType";
 
 const Page = async () => {
   const workshopTypes = await getAllWorkshopTypes();
-  console.log({ workshopTypes });
   return (
     <div className="min-h-screen bg-background text-foreground">
       <section className="py-20 ">
@@ -49,7 +49,7 @@ const Page = async () => {
                   <Label htmlFor="workshopType">Workshop Type</Label>
                   <select
                     name="workshopType"
-                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
                   >
                     {workshopTypes.map((type) => (
                       <option
@@ -61,6 +61,18 @@ const Page = async () => {
                       </option>
                     ))}
                   </select>
+                </div>
+                <div className="">
+                  <Label>What did you like about the workshop?</Label>
+                  <TextArea name="whatYouLiked" />
+                </div>
+                <div className="">
+                  <Label>What could be improved?</Label>
+                  <TextArea name="improvements" />
+                </div>
+                <div className="">
+                  <Label>Sound byte we can feature on our website?</Label>
+                  <TextArea name="marketingSoundByte" />
                 </div>
                 <Button type="submit" className="w-full" size="lg">
                   Submit Testimonial
