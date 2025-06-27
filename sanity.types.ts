@@ -711,6 +711,14 @@ export type FOOTER_QUERYResult = {
   };
 } | null;
 
+// Source: ./src/sanity/queries/workshopType.ts
+// Variable: ALL_WORKSHOP_TYPES_QUERY
+// Query: *[_type == "workshopType"] {    _id,    title  }
+export type ALL_WORKSHOP_TYPES_QUERYResult = Array<{
+  _id: string;
+  title: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -721,5 +729,6 @@ declare module "@sanity/client" {
     "\n    *[_type == \"newletterSignup\" && email == $email] {\n      _id,\n      email\n    }\n  ": EXISTING_SUBSCRIBER_QUERYResult;
     "\n  *[_type == \"homepage\"] [0] {\n    ...,\n    \"events\": events {\n      title,\n      subtitle\n    },\n    \"testimonials\": testimonials {\n      title,\n      subtitle,\n      \"featuredTestimonials\": featuredTestimonials [] -> {\n        firstName,\n        lastName,\n        quote\n      }\n    }\n  }\n": HOMEPAGE_QUERYResult;
     "\n  *[_type == \"siteSettings\"] [0] {\n    socialLinks,\n    footer\n  }\n  ": FOOTER_QUERYResult;
+    "\n  *[_type == \"workshopType\"] {\n    _id,\n    title\n  }\n  ": ALL_WORKSHOP_TYPES_QUERYResult;
   }
 }
