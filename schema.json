@@ -48,7 +48,21 @@
         },
         "optional": true
       },
-      "quote": {
+      "whatYouLiked": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
+      "improvements": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
+      "marketingSoundByte": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

@@ -1,5 +1,7 @@
 "use server";
+import { sanityWriteClient } from "@/sanity/lib/writeClient";
 import { z } from "zod";
+import { Testimonial } from "../../../../../sanity.types";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required."),
@@ -36,14 +38,11 @@ type FormState = {
     | undefined;
 };
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 export async function saveNewTestimonial(
   formState: FormState,
   formData: FormData
 ): Promise<FormState> {
   try {
-    console.log({ formData });
     const rawData = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
@@ -60,20 +59,30 @@ export async function saveNewTestimonial(
       return { success: false, errors: error.formErrors.fieldErrors };
     }
 
-    await delay(2000);
-
-    console.log({ data });
-    return {
-      success: false,
-      errors: {
-        message: "not implemented",
+    const testimonial: TestimonialToSave = {
+      _type: "testimonial",
+      ...data,
+      workshopType: {
+        _ref: data.workshopType,
+        _type: "reference",
       },
     };
+
+    await sanityWriteClient.create(testimonial);
+    return {
+      success: true,
+      errors: undefined,
+    };
   } catch (error) {
-    console.error("Error creating newsletter signup:", error);
+    console.error("Error sending testimonial:", error);
     return {
       success: false,
-      errors: { message: "Failed to sign up for newsletter" },
+      errors: { message: "Failed to send testimonial" },
     };
   }
 }
+
+type TestimonialToSave = Omit<
+  Testimonial,
+  "_id" | "_createdAt" | "_updatedAt" | "_rev"
+>;

@@ -40,22 +40,15 @@ const TestimonialForm = ({
 
   useEffect(() => {
     if (formState.success) {
-      const timeout = setTimeout(() => {
-        // router.push("/");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          workshopType: "",
-          whatYouLiked: "",
-          improvements: "",
-          marketingSoundByte: "",
-        });
-      }, 4000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        workshopType: "",
+        whatYouLiked: "",
+        improvements: "",
+        marketingSoundByte: "",
+      });
     }
   }, [formState.success]);
   useEffect(() => {
@@ -63,6 +56,9 @@ const TestimonialForm = ({
       if (formState.errors && "message" in formState.errors) {
         setErrorMessage(formState.errors.message);
       }
+    } else {
+      console.log("setting the error message as undefined");
+      setErrorMessage(undefined);
     }
   }, [formState]);
   return (
@@ -238,6 +234,11 @@ const TestimonialForm = ({
       <Button type="submit" disabled={isPending} className="w-full" size="lg">
         Submit Testimonial
       </Button>
+      {formState.success && (
+        <p className="text-sm mt-1 text-center">
+          ✔️ Testimonial sent successfully
+        </p>
+      )}
     </form>
   );
 };

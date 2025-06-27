@@ -21,7 +21,9 @@ export type Testimonial = {
   _rev: string;
   firstName: string;
   lastName?: string;
-  quote: string;
+  whatYouLiked: string;
+  improvements: string;
+  marketingSoundByte: string;
   workshopType?: {
     _ref: string;
     _type: "reference";
@@ -661,7 +663,7 @@ export type HOMEPAGE_QUERYResult = {
     featuredTestimonials: Array<{
       firstName: string;
       lastName: string | null;
-      quote: string;
+      quote: null;
     }> | null;
   } | null;
   getInvolved?: {
