@@ -18,12 +18,31 @@ export const testimonialSchema = defineType({
       title: "Last Name",
       type: "string",
     }),
+
     defineField({
-      name: "quote",
-      title: "Quote",
+      name: "whatYouLiked",
+      title: "What did you like about the workshop?",
       type: "text",
       validation: (R) => R.required(),
     }),
+    defineField({
+      name: "improvements",
+      title: "What could be improved?",
+      type: "text",
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "marketingSoundByte",
+      title: "Sound byte we can feature on our website",
+      type: "text",
+      validation: (R) => R.required(),
+    }),
+    // defineField({
+    //   name: "quote",
+    //   title: "Quote",
+    //   type: "text",
+    //   validation: (R) => R.required(),
+    // }),
     defineField({
       name: "workshopType",
       title: "Workshop Type",
