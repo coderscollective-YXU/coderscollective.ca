@@ -83,7 +83,7 @@ export async function signup(formState: FormState, formData: FormData): Promise<
 
       await resend.emails.send({
         from: 'Coders Collective <info@updates.coderscollective.ca>',
-        to: ['sandeep.chopra@coderscollective.ca'],
+        to: ['sandeep@coderscollective.ca'],
         subject: `New Waitlist Signup: ${data.email}`,
         html: `
           <h2>New Waitlist Signup</h2>
