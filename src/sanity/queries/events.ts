@@ -1,8 +1,9 @@
 import { defineQuery } from "next-sanity";
 import { client } from "../lib/client";
 
-const ALL_EVENTS_QUERY = defineQuery(`
-  *[_type == "event" && date >= now()] | order(date asc) {
+// Events within the next 2 months for the Events page
+const EVENTS_NEXT_TWO_MONTHS_QUERY = defineQuery(`
+  *[_type == "event" && date >= now() && date <= $twoMonthsFromNow] | order(date asc) {
     ...
   }
 `)
@@ -15,7 +16,13 @@ const UPCOMING_EVENTS_QUERY = defineQuery(`
 
 export const getAllEvents = async () => {
   try {
-    const allEvents = await client.fetch(ALL_EVENTS_QUERY)
+    // Calculate date 2 months from now
+    const now = new Date();
+    const twoMonthsFromNow = new Date(now.getFullYear(), now.getMonth() + 2, now.getDate());
+
+    const allEvents = await client.fetch(EVENTS_NEXT_TWO_MONTHS_QUERY, {
+      twoMonthsFromNow: twoMonthsFromNow.toISOString()
+    })
     return allEvents
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))

@@ -60,6 +60,7 @@ export async function signup(formState: FormState, formData: FormData): Promise<
     });
 
     try {
+      // Send welcome email to subscriber
       const { error } = await resend.emails.send({
         from: 'Coders Collective <info@updates.coderscollective.ca>',
         to: [data.email],
@@ -72,6 +73,25 @@ export async function signup(formState: FormState, formData: FormData): Promise<
         console.log("Error sending email:", error);
         return { success: false, error: "something went wrong sending the email" };
       }
+
+      // Send notification to site owner
+      const interests = [
+        isMember && "Member",
+        isVolunteer && "Volunteer",
+        isSponsor && "Venue Sponsor"
+      ].filter(Boolean).join(", ");
+
+      await resend.emails.send({
+        from: 'Coders Collective <info@updates.coderscollective.ca>',
+        to: ['sandeep.chopra@coderscollective.ca'],
+        subject: `New Waitlist Signup: ${data.email}`,
+        html: `
+          <h2>New Waitlist Signup</h2>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Interests:</strong> ${interests}</p>
+          <p><strong>Time:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' })}</p>
+        `,
+      });
 
       return { success: true, error: undefined };
     } catch (err) {
